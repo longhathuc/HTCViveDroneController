@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using vJoyInterfaceWrap;
 
-namespace VJoyVive
+namespace HTCViveDroneController
 {
     public partial class ControlPanel : Form
     {

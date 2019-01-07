@@ -1,4 +1,4 @@
-﻿namespace VJoyVive
+﻿namespace HTCViveDroneController
 {
     partial class ControlPanel
     {
@@ -102,7 +102,7 @@
             this.MinimizeBox = false;
             this.Name = "ControlPanel";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "VjoyVive Monitor";
+            this.Text = "Drone Controller Monitor";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ControlPanel_FormClosing);
             this.panelXYSpace.ResumeLayout(false);
             this.panelZSpace.ResumeLayout(false);

@@ -7,14 +7,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HTCViveDroneController", "H
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
-		Debug|Any CPU = Debug|Any CPU
-		Release|Any CPU = Release|Any CPU
+		Debug x64|Any CPU = Debug x64|Any CPU
+		Debug x64|x64 = Debug x64|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{CCA62E05-B035-49F6-A3B4-ACD21CD562E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{CCA62E05-B035-49F6-A3B4-ACD21CD562E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{CCA62E05-B035-49F6-A3B4-ACD21CD562E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{CCA62E05-B035-49F6-A3B4-ACD21CD562E4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CCA62E05-B035-49F6-A3B4-ACD21CD562E4}.Debug x64|Any CPU.ActiveCfg = Debug x64|Any CPU
+		{CCA62E05-B035-49F6-A3B4-ACD21CD562E4}.Debug x64|Any CPU.Build.0 = Debug x64|Any CPU
+		{CCA62E05-B035-49F6-A3B4-ACD21CD562E4}.Debug x64|x64.ActiveCfg = Debug x64|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

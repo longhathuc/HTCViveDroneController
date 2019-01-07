@@ -1,2 +1,25 @@
 
 *.cache
+*.pdb
+obj/Debug x64/HTCViveDroneController.ConfigPanel.resources
+obj/Debug x64/HTCViveDroneController.ControlPanel.resources
+obj/Debug x64/HTCViveDroneController.csproj.CopyComplete
+obj/Debug x64/HTCViveDroneController.csproj.FileListAbsolute.txt
+obj/Debug x64/HTCViveDroneController.exe
+obj/Debug x64/HTCViveDroneController.HTCViveDroneController.resources
+obj/Debug x64/HTCViveDroneController.SteamVrStartDialog.resources
+obj/Debug x64/HTCViveDroneController.StringRequester.resources
+obj/Debug x64/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+obj/Debug x64/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+obj/Debug x64/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+obj/Release X64/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+obj/Release X64/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+obj/Release X64/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+.vs/HTCViveDroneController/v15/.suo
+.vs/HTCViveDroneController/v15/Server/sqlite3/db.lock
+.vs/HTCViveDroneController/v15/Server/sqlite3/storage.ide
+.vs/HTCViveDroneController/v15/Server/sqlite3/storage.ide-shm
+.vs/HTCViveDroneController/v15/Server/sqlite3/storage.ide-wal
+bin/Debug x64/HTCViveDroneController.exe
+bin/Debug x64/HTCViveDroneController.exe.config
+bin/Debug x64/vJoyInterfaceWrap.dll
