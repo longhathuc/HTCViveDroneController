@@ -440,14 +440,15 @@ namespace HTCViveDroneController
         /// <returns>a new label</returns>
         private Label NewLabel(string text)
         {
-            Label lbl = new Label();
+            Label lbl = new Label
+            {
+                Text = text,
+                Visible = true,
+                AutoSize = true,
+                Anchor = AnchorStyles.Right,
 
-            lbl.Text = text;
-            lbl.Visible = true;
-            lbl.AutoSize = true;
-            lbl.Anchor = AnchorStyles.Right;
-
-            lbl.Font = lblHandedness.Font.Clone() as Font;
+                Font = lblHandedness.Font.Clone() as Font
+            };
 
             return lbl;
         }
@@ -485,9 +486,11 @@ namespace HTCViveDroneController
         /// <returns>a new combo box</returns>
         private ComboBox NewComboBoxBase(bool isPrimary)
         {
-            ComboBox cmb = new ComboBox();
-            cmb.Visible = true;
-            cmb.Dock = DockStyle.Fill;
+            ComboBox cmb = new ComboBox
+            {
+                Visible = true,
+                Dock = DockStyle.Fill
+            };
 
             for (ComboBoxItems i = ComboBoxItems.DEFAULT; i <= ComboBoxItems.ENABLE; i++)
             {
