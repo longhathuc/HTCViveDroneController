@@ -1,4 +1,5 @@
-
+obj/
+bin/
 *.cache
 *.pdb
 obj/Debug x64/HTCViveDroneController.ConfigPanel.resources
@@ -23,3 +24,42 @@ obj/Release X64/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
 bin/Debug x64/HTCViveDroneController.exe
 bin/Debug x64/HTCViveDroneController.exe.config
 bin/Debug x64/vJoyInterfaceWrap.dll
+obj/Release/HTCViveDroneController.ConfigPanel.resources
+obj/Release/HTCViveDroneController.ControlPanel.resources
+obj/Release/HTCViveDroneController.csproj.CopyComplete
+obj/Release/HTCViveDroneController.csproj.FileListAbsolute.txt
+obj/Release/HTCViveDroneController.exe
+obj/Release/HTCViveDroneController.HTCViveDroneController.resources
+obj/Release/HTCViveDroneController.SteamVrStartDialog.resources
+obj/Release/HTCViveDroneController.StringRequester.resources
+obj/Release/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+obj/Release/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+obj/Release/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+obj/Release2/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+obj/Release2/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+obj/Release2/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+obj/x64/Release/HTCViveDroneController.ConfigPanel.resources
+obj/x64/Release/HTCViveDroneController.ControlPanel.resources
+obj/x64/Release/HTCViveDroneController.csproj.CopyComplete
+obj/x64/Release/HTCViveDroneController.csproj.FileListAbsolute.txt
+obj/x64/Release/HTCViveDroneController.exe
+obj/x64/Release/HTCViveDroneController.HTCViveDroneController.resources
+obj/x64/Release/HTCViveDroneController.SteamVrStartDialog.resources
+obj/x64/Release/HTCViveDroneController.StringRequester.resources
+obj/x64/Release/TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs
+obj/x64/Release/TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs
+obj/x64/Release/TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs
+UpgradeLog.htm
+bin/vJoyInterfaceWrap.dll
+bin/vJoyInterface.dll
+bin/Release/x64/vJoyInterfaceWrap.dll
+bin/Release/x64/vJoyInterface.lib
+bin/Release/x64/vJoyInterface.dll
+bin/Release/x64/openvr_api.dll
+bin/Release/x64/HTCViveDroneController.exe.config
+bin/Release/x64/HTCViveDroneController.exe
+bin/Release/vJoyInterfaceWrap.dll
+bin/Release/HTCViveDroneController.exe.config
+bin/Release/HTCViveDroneController.exe
+bin/HTCViveDroneController.exe.config
+bin/HTCViveDroneController.exe

@@ -32,6 +32,7 @@
             this.btnVjoyMonitor = new System.Windows.Forms.Button();
             this.lblStatus = new System.Windows.Forms.Label();
             this.btnConfig = new System.Windows.Forms.Button();
+            this.btnVjoyConfig = new System.Windows.Forms.Button();
             this.cmbVJoyId = new System.Windows.Forms.ComboBox();
             this.lblDeviceId = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -43,7 +44,6 @@
             this.toolStripContainer1 = new System.Windows.Forms.ToolStripContainer();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
-            this.btnVjoyConfig = new System.Windows.Forms.Button();
             this.tlpMainPanel.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.toolStripContainer1.ContentPanel.SuspendLayout();
@@ -114,11 +114,22 @@
             this.btnConfig.UseVisualStyleBackColor = true;
             this.btnConfig.Click += new System.EventHandler(this.btnConfig_Click);
             // 
+            // btnVjoyConfig
+            // 
+            this.btnVjoyConfig.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btnVjoyConfig.Location = new System.Drawing.Point(180, 78);
+            this.btnVjoyConfig.Name = "btnVjoyConfig";
+            this.btnVjoyConfig.Size = new System.Drawing.Size(90, 30);
+            this.btnVjoyConfig.TabIndex = 2;
+            this.btnVjoyConfig.Text = "VJoy Config";
+            this.btnVjoyConfig.UseVisualStyleBackColor = true;
+            this.btnVjoyConfig.Click += new System.EventHandler(this.btnVjoyConfig_Click);
+            // 
             // cmbVJoyId
             // 
             this.cmbVJoyId.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbVJoyId.FormattingEnabled = true;
-            this.cmbVJoyId.Location = new System.Drawing.Point(372, 81);
+            this.cmbVJoyId.Location = new System.Drawing.Point(372, 82);
             this.cmbVJoyId.Name = "cmbVJoyId";
             this.cmbVJoyId.Size = new System.Drawing.Size(121, 23);
             this.cmbVJoyId.TabIndex = 4;
@@ -208,17 +219,6 @@
             // openFileDialog1
             // 
             this.openFileDialog1.FileName = "openFileDialog1";
-            // 
-            // btnVjoyConfig
-            // 
-            this.btnVjoyConfig.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnVjoyConfig.Location = new System.Drawing.Point(180, 78);
-            this.btnVjoyConfig.Name = "btnVjoyConfig";
-            this.btnVjoyConfig.Size = new System.Drawing.Size(90, 30);
-            this.btnVjoyConfig.TabIndex = 2;
-            this.btnVjoyConfig.Text = "VJoy Config";
-            this.btnVjoyConfig.UseVisualStyleBackColor = true;
-            this.btnVjoyConfig.Click += new System.EventHandler(this.btnVjoyConfig_Click);
             // 
             // HTCViveDroneController
             // 
