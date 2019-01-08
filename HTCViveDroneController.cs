@@ -1415,11 +1415,6 @@ namespace HTCViveDroneController
             }
         }
 
-        //private void btnMonitorx_Click(object sender, EventArgs e)
-        //{
-        //    _controlPanel.Show();
-        //}
-
         private void btnConfig_Click(object sender, EventArgs e)
         {
             _configPanel.Show();
