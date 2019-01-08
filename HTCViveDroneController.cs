@@ -43,7 +43,7 @@ namespace HTCViveDroneController
         static public bool[] _hatIsButtons = new bool[MAX_NUM_HATS];
 
 
-        public enum ReleaseAction { NONE, CENTER_JOYSTICK, CENTER_RUDDER, MIN_THROTTLE, CENTER_TROTTLE, MAX_THROTTLE };
+        public enum ReleaseAction { NONE, CENTER_JOYSTICK, CENTER_RUDDER, MIN_THROTTLE, CENTER_TROTTLE, MAX_THROTTLE, YAW_ENABLE, PITCH_ENABLE };
         public static ReleaseAction actionOnReleasePrimary = ReleaseAction.NONE;   // action on release of the grip 
         public static ReleaseAction actionOnReleaseSecondary = ReleaseAction.NONE; // action on release of the grip 
 
@@ -662,13 +662,15 @@ namespace HTCViveDroneController
                 THROTTLE_ZERO,
                 THROTTLE_HALF,
                 THROTTLE_MAX,
-                JOYSTICK_ENABLE,
+                JOYSTICK_ENABLE,                
+                YAW_ENABLE,
+                PITCH_ENABLE,
                 // Descrete hats
                 HAT_1,
                 HAT_2,
                 // Analog hats
                 HAT_12,
-                HAT_34,
+                HAT_34
             }
 
             public string Name { get; set; } = "Undefined";
@@ -988,7 +990,37 @@ namespace HTCViveDroneController
                         foreach (ButtonMap.SpecialButton sbutton in speicalButtons)
                         {
                             switch (sbutton)
+
                             {
+                                case ButtonMap.SpecialButton.YAW_ENABLE:
+                                    if (buttonDown)
+                                    {
+                                        if (isPrimary)
+                                        {
+                                            JoyStickLockedPrimary.X = iReport.AxisX;
+                                            //JoyStickLockedPrimary.Y = iReport.AxisY;
+                                            //JoyStickLockedPrimary.ZR = iReport.AxisZRot;
+                                        }
+                                       
+                                        break;
+                                    }
+                                    break;
+
+                                case ButtonMap.SpecialButton.PITCH_ENABLE:
+                                    if (buttonDown)
+                                    {
+                                        if (isPrimary)
+                                        {
+                                            //JoyStickLockedPrimary.X = iReport.AxisX;
+                                            JoyStickLockedPrimary.Y = iReport.AxisY;
+                                            //JoyStickLockedPrimary.ZR = iReport.AxisZRot;
+                                        }
+
+                                        break;
+                                    }
+                                    break;
+
+
                                 case ButtonMap.SpecialButton.CENTER_JOYSTICK:
                                     if (buttonDown)
                                     {
@@ -1182,17 +1214,17 @@ namespace HTCViveDroneController
                         iReport.AxisZRot = Convert.ToInt32((_invertZRAxis ? -1 : 1) * angle.Z / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.ZR);
 
 
-                        // Shake if outsize range
-                        if (gripHolding && (
-                            (iReport.AxisX < _joystickSettings.MinHapticRange) ||
-                            (iReport.AxisX > _joystickSettings.MaxHapticRange) ||
-                            (iReport.AxisY < _joystickSettings.MinHapticRange) ||
-                            (iReport.AxisY > _joystickSettings.MaxHapticRange) ||
-                            (iReport.AxisZRot < _joystickSettings.MinHapticRange) ||
-                            (iReport.AxisZRot > _joystickSettings.MaxHapticRange)))
-                        {
-                            VibrateController(device, 1000);
-                        }
+                        //// Shake if outsize range
+                        //if (gripHolding && (
+                        //    (iReport.AxisX < _joystickSettings.MinHapticRange) ||
+                        //    (iReport.AxisX > _joystickSettings.MaxHapticRange) ||
+                        //    (iReport.AxisY < _joystickSettings.MinHapticRange) ||
+                        //    (iReport.AxisY > _joystickSettings.MaxHapticRange) ||
+                        //    (iReport.AxisZRot < _joystickSettings.MinHapticRange) ||
+                        //    (iReport.AxisZRot > _joystickSettings.MaxHapticRange)))
+                        //{
+                        //    VibrateController(device, 1000);
+                        //}
 
                         // enforce boundaries
                         iReport.AxisX = Math.Max(Math.Min(iReport.AxisX, _joystickSettings.MaxJoystickValue), 0);
@@ -1206,12 +1238,12 @@ namespace HTCViveDroneController
                         iReport.AxisZ = Convert.ToInt32((_invertZAxis ? 1 : -1) * rtLocal.pos.Y / _MotionFullScaleZ * joystickCenter + JoyStickLockedSecondary.Z);
 
                         // Shake if outsize range
-                        if (gripHolding && (
-                            (iReport.AxisZ < _joystickSettings.MinHapticRange) ||
-                            (iReport.AxisZ > _joystickSettings.MaxHapticRange)))
-                        {
-                            VibrateController(device, 50);
-                        }
+                        //if (gripHolding && (
+                        //    (iReport.AxisZ < _joystickSettings.MinHapticRange) ||
+                        //    (iReport.AxisZ > _joystickSettings.MaxHapticRange)))
+                        //{
+                        //    VibrateController(device, 50);
+                        //}
 
                         // enforce boundaries
                         iReport.AxisZ = Math.Max(Math.Min(iReport.AxisZ, _joystickSettings.MaxJoystickValue), 0);
