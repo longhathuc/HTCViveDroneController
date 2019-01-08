@@ -58,7 +58,7 @@ namespace HTCViveDroneController
 
         // Variables
         private static SteamVR _steamVR;
-        private static ControlPanel _controlPanel = new ControlPanel();
+       // private static ControlPanel _controlPanel = new ControlPanel();
         private static ConfigPanel _configPanel = new ConfigPanel();
         private static int _pollCycleMSec = 40;
         private static ushort _hapticPulseUSec = 3999;
@@ -357,6 +357,8 @@ namespace HTCViveDroneController
                 {
                     BinaryFormatter formatter = new BinaryFormatter();
 
+                    
+
                     stream = File.Open(_configFileName, FileMode.Create);
                     
                     formatter.Serialize(stream, _vjoyPath);
@@ -573,7 +575,7 @@ namespace HTCViveDroneController
                         JoyStickLockedPrimary.Reset(_joystickSettings.MaxJoystickValue / 2);
                         JoyStickLockedSecondary.Reset(0);
 
-                        _controlPanel.Setup((int)_joystickSettings.MaxJoystickValue, _joystickSettings.NumberContinuousPovHats);
+                       // _controlPanel.Setup((int)_joystickSettings.MaxJoystickValue, _joystickSettings.NumberContinuousPovHats);
 
                         UpdateStatus("Ready", false);
 
@@ -743,7 +745,7 @@ namespace HTCViveDroneController
             public JoyButton ButtonBit { get { return _buttonBit; } }
             public SpecialButton ButtonSpecial { get { return _buttonSpecial; } }
             public JoyButton DefaultJoyButton { get; } = JoyButton.NONE;
-            public SpecialButton DefaultSpeicalButton { get; } = SpecialButton.NONE;
+            public SpecialButton DefaultSpecialButton { get; } = SpecialButton.NONE;
             public HatButtons HatButton { get; } = null;
 
             /// <summary>
@@ -763,7 +765,7 @@ namespace HTCViveDroneController
             public ButtonMap(SpecialButton specialButton = SpecialButton.NONE)
             {
                 HatButton = new HatButtons();
-                DefaultSpeicalButton = specialButton;
+                DefaultSpecialButton = specialButton;
                 SetButtonMap(specialButton);
             }
 
@@ -995,7 +997,7 @@ namespace HTCViveDroneController
                                 case ButtonMap.SpecialButton.YAW_ENABLE:
                                     if (buttonDown)
                                     {
-                                        if (isPrimary)
+                                        //if (isPrimary)
                                         {
                                             JoyStickLockedPrimary.X = iReport.AxisX;
                                             //JoyStickLockedPrimary.Y = iReport.AxisY;
@@ -1370,11 +1372,6 @@ namespace HTCViveDroneController
             // ask user to find vjoy executables
             while (!isValid)
             {
-            //    folderBrowserDialog1.RootFolder = Environment.SpecialFolder.MyComputer;
-            //    folderBrowserDialog1.SelectedPath = "c:\\program files";
-            //    folderBrowserDialog1.ShowNewFolderButton = false;
-            //    folderBrowserDialog1.Description = "Select the VJoy tools directory (where " + _vjoyMonitorBin + " resides";
-            //    if (DialogResult.OK == folderBrowserDialog1.ShowDialog())
                 openFileDialog1.InitialDirectory = "c:\\program files";
                 openFileDialog1.FileName = _vjoyMonitorBin;
                 openFileDialog1.Multiselect = false;
@@ -1418,10 +1415,10 @@ namespace HTCViveDroneController
             }
         }
 
-        private void btnMonitorx_Click(object sender, EventArgs e)
-        {
-            _controlPanel.Show();
-        }
+        //private void btnMonitorx_Click(object sender, EventArgs e)
+        //{
+        //    _controlPanel.Show();
+        //}
 
         private void btnConfig_Click(object sender, EventArgs e)
         {

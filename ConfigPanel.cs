@@ -229,7 +229,7 @@ namespace HTCViveDroneController
 
                 ButtonMap btnMap = item.Value.Map;
                 ButtonMap.JoyButton defaultJoy = btnMap.DefaultJoyButton;
-                ButtonMap.SpecialButton defaultSpecial = btnMap.DefaultSpeicalButton;
+                ButtonMap.SpecialButton defaultSpecial = btnMap.DefaultSpecialButton;
 
                 switch ((ComboBoxItems)item.Key.SelectedIndex)
                 {
@@ -347,6 +347,7 @@ namespace HTCViveDroneController
                         case ButtonMap.SpecialButton.JOYSTICK_ENABLE: resetValue = ComboBoxItems.ENABLE; break;
                         case ButtonMap.SpecialButton.PITCH_ENABLE: resetValue = ComboBoxItems.PITCH_ENABLE; break;
                         case ButtonMap.SpecialButton.YAW_ENABLE: resetValue = ComboBoxItems.YAW_ENABLE; break;
+
                     }
                 }
                 item.Key.SelectedIndex = (int)resetValue;
@@ -400,11 +401,6 @@ namespace HTCViveDroneController
 
         private void SetFormClientSize()
         {
-            // setup the form size
-            //int cmbRowHeights = (cmbHandedness.Height + cmbHandedness.Margin.Top + cmbHandedness.Margin.Bottom) * (tlpConfig.RowCount - 3 - _hatRowsHidden);
-            //int buttonRowHeight = btnAccept.Height + btnAccept.Margin.Top + btnAccept.Margin.Bottom + flpButtons.Margin.Top + flpButtons.Margin.Bottom;
-            //this.ClientSize = new Size(this.ClientSize.Width, (cmbRowHeights + buttonRowHeight) * 100 / 100);
-
             float rowHeights = 0;
             TableLayoutRowStyleCollection styles = tlpConfig.RowStyles;
             foreach (RowStyle style in styles)
@@ -471,8 +467,8 @@ namespace HTCViveDroneController
                 case ComboBoxItems.THROTTLE_MID: result = "Throttle Half"; break;
                 case ComboBoxItems.THROTTLE_MAX: result = "Throttle Full"; break;               
                 case ComboBoxItems.ENABLE:       result = isPrimary ? "Joystick Enable" : "Throttle Enable"; break;
-                case ComboBoxItems.YAW_ENABLE:  result = "Yaw Enable"; break;
-                case ComboBoxItems.PITCH_ENABLE:result = "Pitch Enable";break;
+                case ComboBoxItems.YAW_ENABLE:   result = "Yaw Enable"; break;
+                case ComboBoxItems.PITCH_ENABLE: result = "Pitch Enable";break;
                 case ComboBoxItems.DHAT: result = "Button Hat"; break;
                 case ComboBoxItems.AHAT: result = "Analog Hat"; break;
             }
@@ -492,7 +488,7 @@ namespace HTCViveDroneController
                 Dock = DockStyle.Fill
             };
 
-            for (ComboBoxItems i = ComboBoxItems.DEFAULT; i <= ComboBoxItems.MAX_ENUM; i++)
+            for (ComboBoxItems i = ComboBoxItems.DEFAULT; i < ComboBoxItems.MAX_ENUM; i++)
             {
                 cmb.Items.Add(ComboBoxItemString(i, isPrimary));
             }

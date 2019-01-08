@@ -37,7 +37,7 @@ namespace HTCViveDroneController
 {
     class Program
     {
-        static Mutex mutex = new Mutex(true, "VjoyVive");
+        static Mutex mutex = new Mutex(true, "HTCViveDroneController");
 
         /// <summary>
         /// The main entry point for the application.
