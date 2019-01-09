@@ -43,7 +43,7 @@ namespace HTCViveDroneController
         static public bool[] _hatIsButtons = new bool[MAX_NUM_HATS];
 
 
-        public enum ReleaseAction { NONE, CENTER_JOYSTICK, CENTER_RUDDER, MIN_THROTTLE, CENTER_TROTTLE, MAX_THROTTLE, YAW_ENABLE, PITCH_ENABLE };
+        public enum ReleaseAction { NONE, CENTER_JOYSTICK, CENTER_RUDDER, CENTER_TROTTLE, YAW_ENABLE, PITCH_ENABLE };
         public static ReleaseAction actionOnReleasePrimary = ReleaseAction.NONE;   // action on release of the grip 
         public static ReleaseAction actionOnReleaseSecondary = ReleaseAction.NONE; // action on release of the grip 
 
@@ -667,6 +667,7 @@ namespace HTCViveDroneController
                 JOYSTICK_ENABLE,                
                 YAW_ENABLE,
                 PITCH_ENABLE,
+                ROLL_ENABLE,
                 // Descrete hats
                 HAT_1,
                 HAT_2,
@@ -927,6 +928,9 @@ namespace HTCViveDroneController
                 bool gripping = false;
                 bool gripReleased = false;
                 bool isPrimary = CurrentConfiguration.RightHanded == isRightHand;
+                bool pitchEnabled = false;
+                bool yawEnabled = false;
+                bool rollEnabled = false;
 
                 // handle primary vs secondary variables - read only
                 Dictionary<ViveButtons, bool> buttons = isPrimary ? _buttonsPrimary : _buttonsSecondary;
@@ -995,32 +999,21 @@ namespace HTCViveDroneController
 
                             {
                                 case ButtonMap.SpecialButton.YAW_ENABLE:
-                                    if (buttonDown)
-                                    {
-                                        //if (isPrimary)
-                                        {
-                                            JoyStickLockedPrimary.X = iReport.AxisX;
-                                            //JoyStickLockedPrimary.Y = iReport.AxisY;
-                                            //JoyStickLockedPrimary.ZR = iReport.AxisZRot;
-                                        }
+                                    if (buttonDown)                                                                           
+                                        yawEnabled = true;                                       
                                        
-                                        break;
-                                    }
                                     break;
 
                                 case ButtonMap.SpecialButton.PITCH_ENABLE:
-                                    if (buttonDown)
-                                    {
-                                        if (isPrimary)
-                                        {
-                                            //JoyStickLockedPrimary.X = iReport.AxisX;
-                                            JoyStickLockedPrimary.Y = iReport.AxisY;
-                                            //JoyStickLockedPrimary.ZR = iReport.AxisZRot;
-                                        }
-
-                                        break;
-                                    }
+                                    if (buttonDown)                                    
+                                        pitchEnabled = true;                                       
                                     break;
+
+                                case ButtonMap.SpecialButton.ROLL_ENABLE:
+                                    if (buttonDown)
+                                        rollEnabled = true;
+                                    break;
+
 
 
                                 case ButtonMap.SpecialButton.CENTER_JOYSTICK:
@@ -1111,9 +1104,7 @@ namespace HTCViveDroneController
                                     break;
 
                                 case ButtonMap.SpecialButton.HAT_1:
-                                case ButtonMap.SpecialButton.HAT_2:
-                                //case ButtonMap.SpecialButton.HAT_3:
-                                //case ButtonMap.SpecialButton.HAT_4:
+                                case ButtonMap.SpecialButton.HAT_2:                             
                                     if (buttonDown)
                                     {
                                         ButtonMap.HatDir dir = GetHatDirection(device);
@@ -1128,9 +1119,7 @@ namespace HTCViveDroneController
                                             switch (buttonMap.ButtonSpecial)
                                             {
                                                 case ButtonMap.SpecialButton.HAT_1: iReport.bHats &= 0xfffffff0; iReport.bHats |= (uint)pov; break;
-                                                case ButtonMap.SpecialButton.HAT_2: iReport.bHats &= 0xffffff0f; iReport.bHats |= (uint)pov << 4; break;
-                                                //case ButtonMap.SpecialButton.HAT_3: iReport.bHats &= 0xfffff0ff; iReport.bHats |= (uint)pov << 8; break;
-                                                //case ButtonMap.SpecialButton.HAT_4: iReport.bHats &= 0xffff0fff; iReport.bHats |= (uint)pov << 12; break;
+                                                case ButtonMap.SpecialButton.HAT_2: iReport.bHats &= 0xffffff0f; iReport.bHats |= (uint)pov << 4; break;                                               
                                             }
                                         }
                                         else
@@ -1210,10 +1199,8 @@ namespace HTCViveDroneController
                         // controller angle is 0 to 360, joystick is 0 to maxJoystickValue
                         // but we can't really move the controller the full range without twising a wrist, so use 4x the range
                         // swap x and y (x angle is y axis)
-                        iReport.AxisX = Convert.ToInt32((_invertXAxis ? -1 : 1) * angle.Y / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.X);
-                        if (CurrentConfiguration.ControlTypeJoystick) iReport.AxisY = Convert.ToInt32((_invertYAxis ? -1 : 1) * angle.X / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.Y);
-                        else iReport.AxisY = Convert.ToInt32((_invertYAxis ? 1 : -1) * rtLocal.pos.Y / _MotionFullScaleZ * joystickCenter + JoyStickLockedPrimary.Y);
-                        iReport.AxisZRot = Convert.ToInt32((_invertZRAxis ? -1 : 1) * angle.Z / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.ZR);
+
+
 
 
                         //// Shake if outsize range
@@ -1229,9 +1216,44 @@ namespace HTCViveDroneController
                         //}
 
                         // enforce boundaries
-                        iReport.AxisX = Math.Max(Math.Min(iReport.AxisX, _joystickSettings.MaxJoystickValue), 0);
-                        iReport.AxisY = Math.Max(Math.Min(iReport.AxisY, _joystickSettings.MaxJoystickValue), 0);
-                        iReport.AxisZRot = Math.Max(Math.Min(iReport.AxisZRot, _joystickSettings.MaxJoystickValue), 0);
+                        //int AxisX = Convert.ToInt32((_invertXAxis ? -1 : 1) * angle.Y / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.X);
+                        //AxisX = Math.Max(Math.Min(iReport.AxisX, _joystickSettings.MaxJoystickValue), 0);
+
+                        if (yawEnabled)
+                        {
+                            iReport.AxisX = Convert.ToInt32((_invertXAxis ? -1 : 1) * angle.Y / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.X);
+                            iReport.AxisX = Math.Max(Math.Min(iReport.AxisX, _joystickSettings.MaxJoystickValue), 0);
+                           
+
+                        }
+                        else
+                        {
+                            JoyStickLockedPrimary.X = AxisX;
+                        }
+                       
+                           
+                        
+                    
+                        if (pitchEnabled)
+                        {
+                            if (CurrentConfiguration.ControlTypeJoystick)
+                                iReport.AxisY = Convert.ToInt32((_invertYAxis ? -1 : 1) * angle.X / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.Y);
+                            else
+                                iReport.AxisY = Convert.ToInt32((_invertYAxis ? 1 : -1) * rtLocal.pos.Y / _MotionFullScaleZ * joystickCenter + JoyStickLockedPrimary.Y);
+                            iReport.AxisY = Math.Max(Math.Min(iReport.AxisY, _joystickSettings.MaxJoystickValue), 0);
+                            //JoyStickLockedPrimary.Y = iReport.AxisY;
+                          
+                        }
+
+                        if (rollEnabled)
+                        {
+                            iReport.AxisZRot = Convert.ToInt32((_invertZRAxis ? -1 : 1) * angle.Z / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.ZR);
+                            iReport.AxisZRot = Math.Max(Math.Min(iReport.AxisZRot, _joystickSettings.MaxJoystickValue), 0);
+                            //JoyStickLockedPrimary.ZR = iReport.AxisZRot;
+
+                        }
+
+                        
                     }
                     else
                     {
@@ -1263,10 +1285,8 @@ namespace HTCViveDroneController
                                 break;
                             case ReleaseAction.CENTER_RUDDER:
                                 JoyStickLockedPrimary.ResetRotation();
-                                break;
-                            case ReleaseAction.MIN_THROTTLE:
-                            case ReleaseAction.CENTER_TROTTLE:
-                            case ReleaseAction.MAX_THROTTLE:
+                                break;                           
+                            case ReleaseAction.CENTER_TROTTLE:                          
                                 Assert("Not implemented");
                                 break;
                             case ReleaseAction.NONE:

@@ -68,13 +68,13 @@
             this.tlpMainPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMainPanel.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.tlpMainPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 10F));
-            this.tlpMainPanel.Size = new System.Drawing.Size(482, 82);
+            this.tlpMainPanel.Size = new System.Drawing.Size(482, 57);
             this.tlpMainPanel.TabIndex = 0;
             // 
             // btnVjoyMonitor
             // 
             this.btnVjoyMonitor.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnVjoyMonitor.Location = new System.Drawing.Point(153, 49);
+            this.btnVjoyMonitor.Location = new System.Drawing.Point(153, 24);
             this.btnVjoyMonitor.Name = "btnVjoyMonitor";
             this.btnVjoyMonitor.Size = new System.Drawing.Size(90, 30);
             this.btnVjoyMonitor.TabIndex = 6;
@@ -87,16 +87,16 @@
             this.lblStatus.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.lblStatus.AutoSize = true;
             this.tlpMainPanel.SetColumnSpan(this.lblStatus, 5);
-            this.lblStatus.Location = new System.Drawing.Point(13, 20);
+            this.lblStatus.Location = new System.Drawing.Point(13, 10);
             this.lblStatus.Name = "lblStatus";
-            this.lblStatus.Size = new System.Drawing.Size(41, 15);
+            this.lblStatus.Size = new System.Drawing.Size(41, 11);
             this.lblStatus.TabIndex = 0;
             this.lblStatus.Text = "status";
             // 
             // btnConfig
             // 
             this.btnConfig.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btnConfig.Location = new System.Drawing.Point(13, 49);
+            this.btnConfig.Location = new System.Drawing.Point(13, 24);
             this.btnConfig.Name = "btnConfig";
             this.btnConfig.Size = new System.Drawing.Size(116, 30);
             this.btnConfig.TabIndex = 1;
@@ -108,7 +108,7 @@
             // 
             this.cmbVJoyId.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.cmbVJoyId.FormattingEnabled = true;
-            this.cmbVJoyId.Location = new System.Drawing.Point(358, 52);
+            this.cmbVJoyId.Location = new System.Drawing.Point(358, 28);
             this.cmbVJoyId.Name = "cmbVJoyId";
             this.cmbVJoyId.Size = new System.Drawing.Size(121, 23);
             this.cmbVJoyId.TabIndex = 4;
@@ -118,7 +118,7 @@
             // 
             this.lblDeviceId.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.lblDeviceId.AutoSize = true;
-            this.lblDeviceId.Location = new System.Drawing.Point(267, 64);
+            this.lblDeviceId.Location = new System.Drawing.Point(267, 39);
             this.lblDeviceId.Margin = new System.Windows.Forms.Padding(3);
             this.lblDeviceId.Name = "lblDeviceId";
             this.lblDeviceId.Size = new System.Drawing.Size(85, 15);
@@ -132,7 +132,7 @@
             // toolStripContainer1.ContentPanel
             // 
             this.toolStripContainer1.ContentPanel.Controls.Add(this.tlpMainPanel);
-            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(482, 82);
+            this.toolStripContainer1.ContentPanel.Size = new System.Drawing.Size(482, 57);
             this.toolStripContainer1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.toolStripContainer1.LeftToolStripPanelVisible = false;
             this.toolStripContainer1.Location = new System.Drawing.Point(0, 0);
