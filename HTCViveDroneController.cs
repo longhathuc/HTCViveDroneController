@@ -1187,7 +1187,7 @@ namespace HTCViveDroneController
                         //debugPrint += " S: " + tstart.rotation.X.ToString(formatF) + "," + tstart.rotation.Y.ToString(formatF) + ", " + tstart.rotation.Z.ToString(formatF) + " E: " + tend.rotation.X.ToString(formatF) + "," + tend.rotation.Y.ToString(formatF) + ", " + tend.rotation.Z.ToString(formatF);
                         //debugPrint += " Angle: " + angle.ToString();
                         //Debug.Print(debugPrint);
-
+                       
                         // convert angle to +/-180
                         while (angle.X < -180) angle.X += 360;
                         while (angle.X > 180) angle.X -= 360;
@@ -1223,19 +1223,15 @@ namespace HTCViveDroneController
                         {
                             iReport.AxisX = Convert.ToInt32((_invertXAxis ? -1 : 1) * angle.Y / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.X);
                             iReport.AxisX = Math.Max(Math.Min(iReport.AxisX, _joystickSettings.MaxJoystickValue), 0);
-                           
-
+                            JoyStickLockedPrimary.X = iReport.AxisX;
                         }
-                        else
-                        {
-                            JoyStickLockedPrimary.X = AxisX;
-                        }
+                       
                        
                            
                         
                     
-                        if (pitchEnabled)
-                        {
+                       // if (pitchEnabled)
+                        //{
                             if (CurrentConfiguration.ControlTypeJoystick)
                                 iReport.AxisY = Convert.ToInt32((_invertYAxis ? -1 : 1) * angle.X / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.Y);
                             else
@@ -1243,15 +1239,15 @@ namespace HTCViveDroneController
                             iReport.AxisY = Math.Max(Math.Min(iReport.AxisY, _joystickSettings.MaxJoystickValue), 0);
                             //JoyStickLockedPrimary.Y = iReport.AxisY;
                           
-                        }
+                        //}
 
-                        if (rollEnabled)
-                        {
+                       // if (rollEnabled)
+                       // {
                             iReport.AxisZRot = Convert.ToInt32((_invertZRAxis ? -1 : 1) * angle.Z / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.ZR);
                             iReport.AxisZRot = Math.Max(Math.Min(iReport.AxisZRot, _joystickSettings.MaxJoystickValue), 0);
                             //JoyStickLockedPrimary.ZR = iReport.AxisZRot;
 
-                        }
+                      //  }
 
                         
                     }
@@ -1260,7 +1256,7 @@ namespace HTCViveDroneController
                         // SECONDARY = THROTTLE
                         // throttle is simply the z axis position 
                         iReport.AxisZ = Convert.ToInt32((_invertZAxis ? 1 : -1) * rtLocal.pos.Y / _MotionFullScaleZ * joystickCenter + JoyStickLockedSecondary.Z);
-
+                       
                         // Shake if outsize range
                         //if (gripHolding && (
                         //    (iReport.AxisZ < _joystickSettings.MinHapticRange) ||
@@ -1274,6 +1270,9 @@ namespace HTCViveDroneController
 
                         //debugPrint += " SPos: " + rtLocal.pos.X.ToString(formatF) + "," + rtLocal.pos.Y.ToString(formatF) + "," + rtLocal.pos.Z.ToString(formatF);
                         //Debug.Print(debugPrint);
+
+                        iReport.AxisXRot = Convert.ToInt32((_invertZAxis ? 1 : -1) * rtLocal.pos.X / _MotionFullScaleZ * joystickCenter + JoyStickLockedSecondary.XR);
+                        iReport.AxisXRot = Math.Max(Math.Min(iReport.AxisXRot, _joystickSettings.MaxJoystickValue), 0);
                     }
 
                     if (gripReleased)
