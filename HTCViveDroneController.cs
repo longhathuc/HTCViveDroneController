@@ -1203,28 +1203,17 @@ namespace HTCViveDroneController
 
 
 
-                        //// Shake if outsize range
-                        //if (gripHolding && (
-                        //    (iReport.AxisX < _joystickSettings.MinHapticRange) ||
-                        //    (iReport.AxisX > _joystickSettings.MaxHapticRange) ||
-                        //    (iReport.AxisY < _joystickSettings.MinHapticRange) ||
-                        //    (iReport.AxisY > _joystickSettings.MaxHapticRange) ||
-                        //    (iReport.AxisZRot < _joystickSettings.MinHapticRange) ||
-                        //    (iReport.AxisZRot > _joystickSettings.MaxHapticRange)))
-                        //{
-                        //    VibrateController(device, 1000);
-                        //}
+                       
 
                         // enforce boundaries
                         //int AxisX = Convert.ToInt32((_invertXAxis ? -1 : 1) * angle.Y / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.X);
                         //AxisX = Math.Max(Math.Min(iReport.AxisX, _joystickSettings.MaxJoystickValue), 0);
 
-                        if (yawEnabled)
-                        {
+                        //if (yawEnabled)
+                        //{
                             iReport.AxisX = Convert.ToInt32((_invertXAxis ? -1 : 1) * angle.Y / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.X);
-                            iReport.AxisX = Math.Max(Math.Min(iReport.AxisX, _joystickSettings.MaxJoystickValue), 0);
-                            JoyStickLockedPrimary.X = iReport.AxisX;
-                        }
+                         
+                        //}
                        
                        
                            
@@ -1236,7 +1225,7 @@ namespace HTCViveDroneController
                                 iReport.AxisY = Convert.ToInt32((_invertYAxis ? -1 : 1) * angle.X / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.Y);
                             else
                                 iReport.AxisY = Convert.ToInt32((_invertYAxis ? 1 : -1) * rtLocal.pos.Y / _MotionFullScaleZ * joystickCenter + JoyStickLockedPrimary.Y);
-                            iReport.AxisY = Math.Max(Math.Min(iReport.AxisY, _joystickSettings.MaxJoystickValue), 0);
+                           
                             //JoyStickLockedPrimary.Y = iReport.AxisY;
                           
                         //}
@@ -1244,26 +1233,39 @@ namespace HTCViveDroneController
                        // if (rollEnabled)
                        // {
                             iReport.AxisZRot = Convert.ToInt32((_invertZRAxis ? -1 : 1) * angle.Z / _RotationFullScaleDegrees * joystickCenter + JoyStickLockedPrimary.ZR);
-                            iReport.AxisZRot = Math.Max(Math.Min(iReport.AxisZRot, _joystickSettings.MaxJoystickValue), 0);
-                            //JoyStickLockedPrimary.ZR = iReport.AxisZRot;
+                           
+                        //JoyStickLockedPrimary.ZR = iReport.AxisZRot;
 
-                      //  }
+                        //  }
 
-                        
+                        //// Shake if outsize range
+                        if (gripHolding && (
+                            (iReport.AxisX < _joystickSettings.MinHapticRange) ||
+                            (iReport.AxisX > _joystickSettings.MaxHapticRange) ||
+                            (iReport.AxisY < _joystickSettings.MinHapticRange) ||
+                            (iReport.AxisY > _joystickSettings.MaxHapticRange) ||
+                            (iReport.AxisZRot < _joystickSettings.MinHapticRange) ||
+                            (iReport.AxisZRot > _joystickSettings.MaxHapticRange)))
+                        {
+                            VibrateController(device, 1000);
+                        }
+                        iReport.AxisX = Math.Max(Math.Min(iReport.AxisX, _joystickSettings.MaxJoystickValue), 0);
+                        iReport.AxisY = Math.Max(Math.Min(iReport.AxisY, _joystickSettings.MaxJoystickValue), 0);
+                        iReport.AxisZRot = Math.Max(Math.Min(iReport.AxisZRot, _joystickSettings.MaxJoystickValue), 0);
                     }
                     else
                     {
                         // SECONDARY = THROTTLE
                         // throttle is simply the z axis position 
                         iReport.AxisZ = Convert.ToInt32((_invertZAxis ? 1 : -1) * rtLocal.pos.Y / _MotionFullScaleZ * joystickCenter + JoyStickLockedSecondary.Z);
-                       
+                        iReport.AxisXRot = Convert.ToInt32((_invertZAxis ? 1 : -1) * rtLocal.pos.X / _MotionFullScaleZ * joystickCenter + JoyStickLockedSecondary.XR);
                         // Shake if outsize range
-                        //if (gripHolding && (
-                        //    (iReport.AxisZ < _joystickSettings.MinHapticRange) ||
-                        //    (iReport.AxisZ > _joystickSettings.MaxHapticRange)))
-                        //{
-                        //    VibrateController(device, 50);
-                        //}
+                        if (gripHolding && (
+                            (iReport.AxisZ < _joystickSettings.MinHapticRange) ||
+                            (iReport.AxisZ > _joystickSettings.MaxHapticRange)))
+                        {
+                            VibrateController(device, 50);
+                        }
 
                         // enforce boundaries
                         iReport.AxisZ = Math.Max(Math.Min(iReport.AxisZ, _joystickSettings.MaxJoystickValue), 0);
@@ -1271,7 +1273,7 @@ namespace HTCViveDroneController
                         //debugPrint += " SPos: " + rtLocal.pos.X.ToString(formatF) + "," + rtLocal.pos.Y.ToString(formatF) + "," + rtLocal.pos.Z.ToString(formatF);
                         //Debug.Print(debugPrint);
 
-                        iReport.AxisXRot = Convert.ToInt32((_invertZAxis ? 1 : -1) * rtLocal.pos.X / _MotionFullScaleZ * joystickCenter + JoyStickLockedSecondary.XR);
+                       
                         iReport.AxisXRot = Math.Max(Math.Min(iReport.AxisXRot, _joystickSettings.MaxJoystickValue), 0);
                     }
 
