@@ -87,10 +87,10 @@ namespace HTCViveDroneController
 
         private void Setup(string configName)
         {
-            const int columnPrimaryLbl = 1;
-            const int columnPrimaryCmb = 2;
-            const int columnSecondaryLbl = 4;
-            const int columnSecondaryCmb = 5;
+            const int columnPrimaryLbl = 4;
+            const int columnPrimaryCmb = 5;
+            const int columnSecondaryLbl = 1;
+            const int columnSecondaryCmb = 2;
 
             _initialized = false;
 
@@ -213,18 +213,7 @@ namespace HTCViveDroneController
                         break;
                     case ComboBoxItems.THROTTLE_MID:
                         btnMap.SetButtonMap(ButtonMap.SpecialButton.THROTTLE_HALF);
-                        break;
-                    //case ComboBoxItems.THROTTLE_MAX:
-                    //    btnMap.SetButtonMap(ButtonMap.SpecialButton.THROTTLE_MAX);
-                    //    break;
-                    case ComboBoxItems.DHAT:
-                        btnMap.SetButtonMap(isPrimary ? ButtonMap.SpecialButton.HAT_1 : ButtonMap.SpecialButton.HAT_2);
-                        ResetHatButtons(btnMap.HatButton, isPrimary);
-                        break;
-                    case ComboBoxItems.AHAT:
-                        btnMap.SetButtonMap(isPrimary ? ButtonMap.SpecialButton.HAT_12 : ButtonMap.SpecialButton.HAT_34);
-                        ResetHatButtons(btnMap.HatButton, isPrimary);
-                        break;
+                        break;                  
                     case ComboBoxItems.ENABLE:
                         btnMap.SetButtonMap(ButtonMap.SpecialButton.JOYSTICK_ENABLE);
                         break;
@@ -245,49 +234,7 @@ namespace HTCViveDroneController
                 }
             }
 
-            //foreach (KeyValuePair<ComboBox, ConfigHatItem> item in _configHatItems)
-            //{
-            //    ButtonMap btnMap = item.Value.BaseItem.Map;
-            //    if ((btnMap.ButtonSpecial == ButtonMap.SpecialButton.HAT_1) || (btnMap.ButtonSpecial == ButtonMap.SpecialButton.HAT_2))
-            //    {
-            //        bool isPrimary = item.Value.BaseItem.IsPrimary;
-            //        ButtonMap.HatButtons hat = btnMap.HatButton;
-            //        ButtonMap.HatDir dir = item.Value.Dir;
-
-            //        switch ((ComboBoxItems)item.Key.SelectedIndex)
-            //        {
-            //            case ComboBoxItems.CENTER:
-            //                hat.SetButton(dir, ButtonMap.SpecialButton.CENTER_JOYSTICK);
-            //                break;
-            //            case ComboBoxItems.CENTER_RUDDER:
-            //                hat.SetButton(dir, ButtonMap.SpecialButton.CENTER_RUDDER);
-            //                break;
-            //            case ComboBoxItems.THROTTLE_OFF:
-            //                hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_ZERO);
-            //                break;
-            //            case ComboBoxItems.THROTTLE_MID:
-            //                hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_HALF);
-            //                break;
-            //            //case ComboBoxItems.THROTTLE_MAX:
-            //            //    hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_MAX);
-            //            //    break;
-            //            case ComboBoxItems.YAW_ENABLE:
-            //                hat.SetButton(dir,ButtonMap.SpecialButton.YAW_ENABLE);
-            //                break;
-            //            case ComboBoxItems.PITCH_ENABLE:
-            //                hat.SetButton(dir,ButtonMap.SpecialButton.PITCH_ENABLE);
-            //                break;
-            //            case ComboBoxItems.ROLL_ENABLE:
-            //                hat.SetButton(dir,ButtonMap.SpecialButton.ROLL_ENABLE);
-            //                break;
-            //            case ComboBoxItems.DEFAULT:
-            //            default:
-            //                hat.SetToDefalt(dir);
-            //                break;
-            //        }
-            //    }
-            //}
-            
+           
             // Save to disk
             HTCViveDroneController.SaveConfig();
         }
@@ -310,11 +257,7 @@ namespace HTCViveDroneController
                         case ButtonMap.SpecialButton.CENTER_RUDDER: resetValue = ComboBoxItems.CENTER_RUDDER; break;
                         case ButtonMap.SpecialButton.THROTTLE_ZERO: resetValue = ComboBoxItems.THROTTLE_OFF; break;
                         case ButtonMap.SpecialButton.THROTTLE_HALF: resetValue = ComboBoxItems.THROTTLE_MID; break;
-                        //case ButtonMap.SpecialButton.THROTTLE_MAX: resetValue = ComboBoxItems.THROTTLE_MAX; break;
-                        case ButtonMap.SpecialButton.HAT_1: resetValue = ComboBoxItems.DHAT; break;
-                        case ButtonMap.SpecialButton.HAT_2: resetValue = ComboBoxItems.DHAT; break;
-                        case ButtonMap.SpecialButton.HAT_12: resetValue = ComboBoxItems.AHAT; break;
-                        case ButtonMap.SpecialButton.HAT_34: resetValue = ComboBoxItems.AHAT; break;
+                        //case ButtonMap.SpecialButton.THROTTLE_MAX: resetValue = ComboBoxItems.THROTTLE_MAX; break;                     
                         case ButtonMap.SpecialButton.JOYSTICK_ENABLE: resetValue = ComboBoxItems.ENABLE; break;
                         case ButtonMap.SpecialButton.PITCH_ENABLE: resetValue = ComboBoxItems.PITCH_ENABLE; break;
                         case ButtonMap.SpecialButton.YAW_ENABLE: resetValue = ComboBoxItems.YAW_ENABLE; break;
@@ -356,17 +299,7 @@ namespace HTCViveDroneController
             _initialized = true;
         }
 
-        private void ResetHatButtons(ButtonMap.HatButtons hat, bool isPrimary)
-        {
-            if (hat != null)
-            {
-                hat.SetupHatButton(ButtonMap.HatDir.UP, isPrimary ? ButtonMap.JoyButton.PRIMARY_UP : ButtonMap.JoyButton.SECONDARY_UP);
-                hat.SetupHatButton(ButtonMap.HatDir.DOWN, isPrimary ? ButtonMap.JoyButton.PRIMARY_DOWN : ButtonMap.JoyButton.SECONDARY_DOWN);
-                hat.SetupHatButton(ButtonMap.HatDir.LEFT, isPrimary ? ButtonMap.JoyButton.PRIMARY_LEFT : ButtonMap.JoyButton.SECONDARY_LEFT);
-                hat.SetupHatButton(ButtonMap.HatDir.RIGHT, isPrimary ? ButtonMap.JoyButton.PRIMARY_RIGHT : ButtonMap.JoyButton.SECONDARY_RIGHT);
-            }
-        }
-
+      
         private string TitleCase(string text)
         {
             return text.Substring(0, 1).ToUpper() + text.Substring(1).ToLower();
@@ -420,7 +353,7 @@ namespace HTCViveDroneController
             return lbl;
         }
 
-        private enum ComboBoxItems { DEFAULT=0, CENTER, CENTER_RUDDER, YAW_ENABLE, PITCH_ENABLE, ROLL_ENABLE, THROTTLE_OFF, THROTTLE_MID, ENABLE, DHAT, AHAT, MAX_ENUM }
+        private enum ComboBoxItems { DEFAULT=0, CENTER, CENTER_RUDDER, YAW_ENABLE, PITCH_ENABLE, ROLL_ENABLE, THROTTLE_OFF, THROTTLE_MID, ENABLE, MAX_ENUM }
 
         /// <summary>
         /// Get the string for combo box options
@@ -442,9 +375,7 @@ namespace HTCViveDroneController
                 case ComboBoxItems.ENABLE:       result = isPrimary ? "Joystick Enable" : "Throttle Enable"; break;
                 case ComboBoxItems.YAW_ENABLE:   result = "Yaw Enable"; break;
                 case ComboBoxItems.PITCH_ENABLE: result = "Pitch Enable";break;
-                case ComboBoxItems.ROLL_ENABLE: result = "Roll Enable"; break;
-                case ComboBoxItems.DHAT: result = "Button Hat"; break;
-                case ComboBoxItems.AHAT: result = "Analog Hat"; break;
+                case ComboBoxItems.ROLL_ENABLE: result = "Roll Enable"; break;              
             }
             return result;
         }
@@ -480,18 +411,9 @@ namespace HTCViveDroneController
         private ComboBox NewComboBox(ViveButtons buttonType, ButtonMap buttonMap, bool isPrimary)
         {
             ComboBox cmb = NewComboBoxBase(isPrimary);
-            if (buttonType == ViveButtons.TOUCHPAD)
-            {
-                for (ComboBoxItems i = ComboBoxItems.ENABLE + 1; i < ComboBoxItems.MAX_ENUM; i++)
-                {
-                    //Diable Analog Hat for now
-                    if (i != ComboBoxItems.AHAT) cmb.Items.Add(ComboBoxItemString(i));
-                }
-            }
+            
             if (buttonType == ViveButtons.GRIP) cmb.SelectedIndex = (int)ComboBoxItems.ENABLE;
             else cmb.SelectedIndex = (int)ComboBoxItems.DEFAULT;
-
-           
 
             _configItems.Add(cmb, new ConfigItem(isPrimary, buttonType, buttonMap));
             return cmb;

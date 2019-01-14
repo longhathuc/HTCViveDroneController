@@ -29,12 +29,10 @@
         private void InitializeComponent()
         {
             this.tlpConfig = new System.Windows.Forms.TableLayoutPanel();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
+            this.lblLeftController = new System.Windows.Forms.Label();
+            this.lblRightController = new System.Windows.Forms.Label();
             this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblConfiguration = new System.Windows.Forms.Label();
             this.cmbConfigurations = new System.Windows.Forms.ComboBox();
             this.flpButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAccept = new System.Windows.Forms.Button();
@@ -57,12 +55,10 @@
             this.tlpConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 140F));
             this.tlpConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 12F));
-            this.tlpConfig.Controls.Add(this.label4, 1, 3);
-            this.tlpConfig.Controls.Add(this.label5, 4, 3);
-            this.tlpConfig.Controls.Add(this.label6, 1, 7);
-            this.tlpConfig.Controls.Add(this.label7, 4, 7);
-            this.tlpConfig.Controls.Add(this.flowLayoutPanel1, 1, 1);
+            this.tlpConfig.Controls.Add(this.lblLeftController, 1, 3);
+            this.tlpConfig.Controls.Add(this.lblRightController, 4, 3);
             this.tlpConfig.Controls.Add(this.flpButtons, 1, 10);
+            this.tlpConfig.Controls.Add(this.flowLayoutPanel1, 1, 1);
             this.tlpConfig.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlpConfig.Location = new System.Drawing.Point(0, 0);
             this.tlpConfig.Name = "tlpConfig";
@@ -82,77 +78,53 @@
             this.tlpConfig.Size = new System.Drawing.Size(596, 179);
             this.tlpConfig.TabIndex = 0;
             // 
-            // label4
+            // lblLeftController
             // 
-            this.label4.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label4.AutoSize = true;
-            this.tlpConfig.SetColumnSpan(this.label4, 2);
-            this.label4.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(84, 65);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(135, 19);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Right Controller";
+            this.lblLeftController.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblLeftController.AutoSize = true;
+            this.tlpConfig.SetColumnSpan(this.lblLeftController, 2);
+            this.lblLeftController.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblLeftController.Location = new System.Drawing.Point(90, 65);
+            this.lblLeftController.Name = "lblLeftController";
+            this.lblLeftController.Size = new System.Drawing.Size(123, 19);
+            this.lblLeftController.TabIndex = 12;
+            this.lblLeftController.Text = "Left Controller";
             // 
-            // label5
+            // lblRightController
             // 
-            this.label5.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.label5.AutoSize = true;
-            this.tlpConfig.SetColumnSpan(this.label5, 2);
-            this.label5.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(382, 65);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(123, 19);
-            this.label5.TabIndex = 13;
-            this.label5.Text = "Left Controller";
-            // 
-            // label6
-            // 
-            this.label6.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label6.AutoSize = true;
-            this.tlpConfig.SetColumnSpan(this.label6, 2);
-            this.label6.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(124, 103);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(55, 16);
-            this.label6.TabIndex = 14;
-            this.label6.Text = "Buttons";
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.label7.AutoSize = true;
-            this.tlpConfig.SetColumnSpan(this.label7, 2);
-            this.label7.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(416, 103);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(55, 16);
-            this.label7.TabIndex = 15;
-            this.label7.Text = "Buttons";
+            this.lblRightController.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.lblRightController.AutoSize = true;
+            this.tlpConfig.SetColumnSpan(this.lblRightController, 2);
+            this.lblRightController.Font = new System.Drawing.Font("Arial", 12.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblRightController.Location = new System.Drawing.Point(376, 65);
+            this.lblRightController.Name = "lblRightController";
+            this.lblRightController.Size = new System.Drawing.Size(135, 19);
+            this.lblRightController.TabIndex = 13;
+            this.lblRightController.Text = "Right Controller";
             // 
             // flowLayoutPanel1
             // 
             this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.flowLayoutPanel1.AutoSize = true;
             this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tlpConfig.SetColumnSpan(this.flowLayoutPanel1, 5);
-            this.flowLayoutPanel1.Controls.Add(this.label1);
+            this.tlpConfig.SetColumnSpan(this.flowLayoutPanel1, 3);
+            this.flowLayoutPanel1.Controls.Add(this.lblConfiguration);
             this.flowLayoutPanel1.Controls.Add(this.cmbConfigurations);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(172, 15);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(248, 15);
             this.flowLayoutPanel1.Name = "flowLayoutPanel1";
             this.flowLayoutPanel1.Size = new System.Drawing.Size(251, 32);
             this.flowLayoutPanel1.TabIndex = 16;
             // 
-            // label1
+            // lblConfiguration
             // 
-            this.label1.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(3, 7);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(105, 18);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Configuration:";
+            this.lblConfiguration.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblConfiguration.AutoSize = true;
+            this.lblConfiguration.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfiguration.Location = new System.Drawing.Point(3, 7);
+            this.lblConfiguration.Name = "lblConfiguration";
+            this.lblConfiguration.Size = new System.Drawing.Size(105, 18);
+            this.lblConfiguration.TabIndex = 3;
+            this.lblConfiguration.Text = "Configuration:";
             // 
             // cmbConfigurations
             // 
@@ -249,12 +221,10 @@
         private System.Windows.Forms.FlowLayoutPanel flpButtons;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnAccept;
-        private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label lblLeftController;
+        private System.Windows.Forms.Label lblRightController;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanel1;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblConfiguration;
         private System.Windows.Forms.ComboBox cmbConfigurations;
         private System.Windows.Forms.Button btnOK;
     }
