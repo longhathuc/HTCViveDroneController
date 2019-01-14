@@ -1437,8 +1437,11 @@ namespace HTCViveDroneController
         }
 
         private void btnConfig_Click(object sender, EventArgs e)
-        {
+        {                   
+           
+           
             _configPanel.Show();
+
         }
 
         private void btnVjoyConfig_Click(object sender, EventArgs e)
@@ -1509,4 +1512,6 @@ namespace HTCViveDroneController
             private static extern bool IsIconic(IntPtr handle);
         }
     }
+
+
 }

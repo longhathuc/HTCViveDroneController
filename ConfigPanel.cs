@@ -110,80 +110,33 @@ namespace HTCViveDroneController
             }
             cmbConfigurations.Items.Add(_newConfigName);
             cmbConfigurations.SelectedItem = config.Name;
-            // remove all the button controls before setting them up again
-            //foreach (Control ctrl in tlpConfig.Controls)
-            //{
-            //    int row = tlpConfig.GetPositionFromControl(ctrl).Row;
-            //    if ((ctrl != flpButtons) && (row >= _cfgRowStart))
-            //    {
-            //        tlpConfig.Controls.Remove(ctrl);
-            //        ctrl.Dispose();
-            //    }
-            //}
-            //tlpConfig.SetRow(flpButtons, _cfgRowStart + 1);
-            //tlpConfig.RowCount = _cfgRowStart + 2;
-
-            //_configItems.Clear();
-            //_primaryHatDirControls.Clear();
-            //_secondaryHatDirControls.Clear();
-            //cmbHandedness.SelectedIndex = config.RightHanded ? 0 : 1;
-            //cmbControlType.SelectedIndex = config.ControlTypeJoystick ? 0 : 1;
-            //cmbPrimaryEnableType.SelectedIndex = config.GripTypeTogglePrimary ? 1 : 0;
-            //cmbSecondaryEnableType.SelectedIndex = config.GripTypeToggleSecondary ? 1 : 0;
+          
 
             if (_configItems.Count == 0)
             {
                 // Primary button controls
                 int rowIndex = _cfgRowStart;
                 foreach (KeyValuePair<ViveButtons, ButtonMap> item in config.PrimaryMap)
-                {
-                    NewRow(rowIndex);
-                    tlpConfig.Controls.Add(NewLabel(item.Value.Name), columnPrimaryLbl, rowIndex);
-                    tlpConfig.Controls.Add(NewComboBox(item.Key, item.Value, true), columnPrimaryCmb, rowIndex);
-                    rowIndex++;
-                    if (item.Key == ViveButtons.TOUCHPAD)
+                    if (item.Key != ViveButtons.TOUCHPAD)
                     {
-                        ComboBox touchpadCmb = tlpConfig.GetControlFromPosition(columnPrimaryCmb, rowIndex - 1) as ComboBox;
-                        foreach (ButtonMap.HatDir dir in Enum.GetValues(typeof(ButtonMap.HatDir)))
-                        {
-                            Label hatLabel = NewLabel(TitleCase(Enum.GetName(typeof(ButtonMap.HatDir), dir)));
-                            ComboBox hatComboBox = NewComboBox(touchpadCmb, dir);
-                            _primaryHatDirControls.Add(hatLabel);
-                            _primaryHatDirControls.Add(hatComboBox);
-
-                            NewRow(rowIndex);
-                            tlpConfig.Controls.Add(hatLabel, columnPrimaryLbl, rowIndex);
-                            tlpConfig.Controls.Add(hatComboBox, columnPrimaryCmb, rowIndex); // use menu button so it acts like regular button
-                            rowIndex++;
-                        }
+                        NewRow(rowIndex);
+                        tlpConfig.Controls.Add(NewLabel(item.Value.Name), columnPrimaryLbl, rowIndex);
+                        tlpConfig.Controls.Add(NewComboBox(item.Key, item.Value, true), columnPrimaryCmb, rowIndex);
+                        rowIndex++;
+                        
                     }
-                }
 
                 // Secondary button controls
                 rowIndex = _cfgRowStart;
                 foreach (KeyValuePair<ViveButtons, ButtonMap> item in config.SecondaryMap)
-                {
-                    NewRow(rowIndex);
-                    tlpConfig.Controls.Add(NewLabel(item.Value.Name), columnSecondaryLbl, rowIndex);
-                    tlpConfig.Controls.Add(NewComboBox(item.Key, item.Value, false), columnSecondaryCmb, rowIndex);
-                    rowIndex++;
-                    if (item.Key == ViveButtons.TOUCHPAD)
+                    if (item.Key != ViveButtons.TOUCHPAD)
                     {
-                        ComboBox touchpadCmb = tlpConfig.GetControlFromPosition(columnSecondaryCmb, rowIndex - 1) as ComboBox;
-                        foreach (ButtonMap.HatDir dir in Enum.GetValues(typeof(ButtonMap.HatDir)))
-                        {
-                            Label hatLabel = NewLabel(TitleCase(Enum.GetName(typeof(ButtonMap.HatDir), dir)));
-                            ComboBox hatComboBox = NewComboBox(touchpadCmb, dir);
-                            _secondaryHatDirControls.Add(hatLabel);
-                            _secondaryHatDirControls.Add(hatComboBox);
-
-                            NewRow(rowIndex);
-                            tlpConfig.Controls.Add(hatLabel, columnSecondaryLbl, rowIndex);
-                            tlpConfig.Controls.Add(hatComboBox, columnSecondaryCmb, rowIndex); // use menu button so it acts like regular button
-                            rowIndex++;
-                        }
+                        NewRow(rowIndex);
+                        tlpConfig.Controls.Add(NewLabel(item.Value.Name), columnSecondaryLbl, rowIndex);
+                        tlpConfig.Controls.Add(NewComboBox(item.Key, item.Value, false), columnSecondaryCmb, rowIndex);
+                        rowIndex++;
+                   
                     }
-                }
             }
             else
             {
@@ -234,10 +187,10 @@ namespace HTCViveDroneController
             HTCViveDroneController.Configuration config = HTCViveDroneController.GetConfig(name);
 
             // First Save to the main structure, then save the structure to disk
-            config.RightHanded = cmbHandedness.SelectedIndex == 0;
-            config.ControlTypeJoystick = cmbControlType.SelectedIndex == 0;
-            config.GripTypeTogglePrimary = cmbPrimaryEnableType.SelectedIndex == 1;
-            config.GripTypeToggleSecondary = cmbSecondaryEnableType.SelectedIndex == 1;
+            config.RightHanded = true;
+            config.ControlTypeJoystick = true;
+            config.GripTypeTogglePrimary = true;
+            config.GripTypeToggleSecondary =true;
 
             foreach (KeyValuePair<ComboBox, ConfigItem> item in _configItems)
             {
@@ -342,11 +295,7 @@ namespace HTCViveDroneController
         private void ResetConfig()
         {
             _initialized = false;
-            cmbHandedness.SelectedIndex = HTCViveDroneController.CurrentConfiguration.RightHanded ? 0 : 1;
-            cmbControlType.SelectedIndex = HTCViveDroneController.CurrentConfiguration.ControlTypeJoystick ? 0 : 1;
-            cmbPrimaryEnableType.SelectedIndex = HTCViveDroneController.CurrentConfiguration.GripTypeTogglePrimary ? 1 : 0;
-            cmbSecondaryEnableType.SelectedIndex = HTCViveDroneController.CurrentConfiguration.GripTypeToggleSecondary ? 1 : 0;
-
+         
             foreach (KeyValuePair<ComboBox, ConfigItem> item in _configItems)
             {
                 bool isPrimary = item.Value.IsPrimary;
@@ -465,7 +414,7 @@ namespace HTCViveDroneController
                 AutoSize = true,
                 Anchor = AnchorStyles.Right,
 
-                Font = lblHandedness.Font.Clone() as Font
+               
             };
 
             return lbl;
@@ -542,7 +491,7 @@ namespace HTCViveDroneController
             if (buttonType == ViveButtons.GRIP) cmb.SelectedIndex = (int)ComboBoxItems.ENABLE;
             else cmb.SelectedIndex = (int)ComboBoxItems.DEFAULT;
 
-            cmb.Font = cmbHandedness.Font.Clone() as Font;
+           
 
             _configItems.Add(cmb, new ConfigItem(isPrimary, buttonType, buttonMap));
             return cmb;
