@@ -1050,8 +1050,7 @@ namespace HTCViveDroneController
                                     {
                                         if (!isPrimary)
                                         {
-                                            iReport.AxisZ = (_invertZAxis ? _joystickSettings.MaxJoystickValue : 0);
-                                            JoyStickLockedSecondary.Reset(iReport.AxisZ);
+                                            iReport.AxisZ = 0;
                                             gripDownRT = rt;
                                         }
                                         else Assert("Not implemented: zero throttle from joystick controller");

@@ -208,9 +208,9 @@ namespace HTCViveDroneController
                     case ComboBoxItems.CENTER_RUDDER:
                         btnMap.SetButtonMap(ButtonMap.SpecialButton.CENTER_RUDDER);
                         break;
-                    //case ComboBoxItems.THROTTLE_OFF:
-                    //    btnMap.SetButtonMap(ButtonMap.SpecialButton.THROTTLE_ZERO);
-                    //    break;
+                    case ComboBoxItems.THROTTLE_OFF:
+                        btnMap.SetButtonMap(ButtonMap.SpecialButton.THROTTLE_ZERO);
+                        break;
                     case ComboBoxItems.THROTTLE_MID:
                         btnMap.SetButtonMap(ButtonMap.SpecialButton.THROTTLE_HALF);
                         break;
@@ -245,48 +245,48 @@ namespace HTCViveDroneController
                 }
             }
 
-            foreach (KeyValuePair<ComboBox, ConfigHatItem> item in _configHatItems)
-            {
-                ButtonMap btnMap = item.Value.BaseItem.Map;
-                if ((btnMap.ButtonSpecial == ButtonMap.SpecialButton.HAT_1) || (btnMap.ButtonSpecial == ButtonMap.SpecialButton.HAT_2))
-                {
-                    bool isPrimary = item.Value.BaseItem.IsPrimary;
-                    ButtonMap.HatButtons hat = btnMap.HatButton;
-                    ButtonMap.HatDir dir = item.Value.Dir;
+            //foreach (KeyValuePair<ComboBox, ConfigHatItem> item in _configHatItems)
+            //{
+            //    ButtonMap btnMap = item.Value.BaseItem.Map;
+            //    if ((btnMap.ButtonSpecial == ButtonMap.SpecialButton.HAT_1) || (btnMap.ButtonSpecial == ButtonMap.SpecialButton.HAT_2))
+            //    {
+            //        bool isPrimary = item.Value.BaseItem.IsPrimary;
+            //        ButtonMap.HatButtons hat = btnMap.HatButton;
+            //        ButtonMap.HatDir dir = item.Value.Dir;
 
-                    switch ((ComboBoxItems)item.Key.SelectedIndex)
-                    {
-                        case ComboBoxItems.CENTER:
-                            hat.SetButton(dir, ButtonMap.SpecialButton.CENTER_JOYSTICK);
-                            break;
-                        case ComboBoxItems.CENTER_RUDDER:
-                            hat.SetButton(dir, ButtonMap.SpecialButton.CENTER_RUDDER);
-                            break;
-                        //case ComboBoxItems.THROTTLE_OFF:
-                        //    hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_ZERO);
-                        //    break;
-                        case ComboBoxItems.THROTTLE_MID:
-                            hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_HALF);
-                            break;
-                        //case ComboBoxItems.THROTTLE_MAX:
-                        //    hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_MAX);
-                        //    break;
-                        case ComboBoxItems.YAW_ENABLE:
-                            hat.SetButton(dir,ButtonMap.SpecialButton.YAW_ENABLE);
-                            break;
-                        case ComboBoxItems.PITCH_ENABLE:
-                            hat.SetButton(dir,ButtonMap.SpecialButton.PITCH_ENABLE);
-                            break;
-                        case ComboBoxItems.ROLL_ENABLE:
-                            hat.SetButton(dir,ButtonMap.SpecialButton.ROLL_ENABLE);
-                            break;
-                        case ComboBoxItems.DEFAULT:
-                        default:
-                            hat.SetToDefalt(dir);
-                            break;
-                    }
-                }
-            }
+            //        switch ((ComboBoxItems)item.Key.SelectedIndex)
+            //        {
+            //            case ComboBoxItems.CENTER:
+            //                hat.SetButton(dir, ButtonMap.SpecialButton.CENTER_JOYSTICK);
+            //                break;
+            //            case ComboBoxItems.CENTER_RUDDER:
+            //                hat.SetButton(dir, ButtonMap.SpecialButton.CENTER_RUDDER);
+            //                break;
+            //            case ComboBoxItems.THROTTLE_OFF:
+            //                hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_ZERO);
+            //                break;
+            //            case ComboBoxItems.THROTTLE_MID:
+            //                hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_HALF);
+            //                break;
+            //            //case ComboBoxItems.THROTTLE_MAX:
+            //            //    hat.SetButton(dir, ButtonMap.SpecialButton.THROTTLE_MAX);
+            //            //    break;
+            //            case ComboBoxItems.YAW_ENABLE:
+            //                hat.SetButton(dir,ButtonMap.SpecialButton.YAW_ENABLE);
+            //                break;
+            //            case ComboBoxItems.PITCH_ENABLE:
+            //                hat.SetButton(dir,ButtonMap.SpecialButton.PITCH_ENABLE);
+            //                break;
+            //            case ComboBoxItems.ROLL_ENABLE:
+            //                hat.SetButton(dir,ButtonMap.SpecialButton.ROLL_ENABLE);
+            //                break;
+            //            case ComboBoxItems.DEFAULT:
+            //            default:
+            //                hat.SetToDefalt(dir);
+            //                break;
+            //        }
+            //    }
+            //}
             
             // Save to disk
             HTCViveDroneController.SaveConfig();
@@ -308,7 +308,7 @@ namespace HTCViveDroneController
                     {
                         case ButtonMap.SpecialButton.CENTER_JOYSTICK: resetValue = ComboBoxItems.CENTER; break;
                         case ButtonMap.SpecialButton.CENTER_RUDDER: resetValue = ComboBoxItems.CENTER_RUDDER; break;
-                       // case ButtonMap.SpecialButton.THROTTLE_ZERO: resetValue = ComboBoxItems.THROTTLE_OFF; break;
+                        case ButtonMap.SpecialButton.THROTTLE_ZERO: resetValue = ComboBoxItems.THROTTLE_OFF; break;
                         case ButtonMap.SpecialButton.THROTTLE_HALF: resetValue = ComboBoxItems.THROTTLE_MID; break;
                         //case ButtonMap.SpecialButton.THROTTLE_MAX: resetValue = ComboBoxItems.THROTTLE_MAX; break;
                         case ButtonMap.SpecialButton.HAT_1: resetValue = ComboBoxItems.DHAT; break;
@@ -340,7 +340,7 @@ namespace HTCViveDroneController
                     {
                         case ButtonMap.SpecialButton.CENTER_JOYSTICK: resetValue = ComboBoxItems.CENTER; break;
                         case ButtonMap.SpecialButton.CENTER_RUDDER: resetValue = ComboBoxItems.CENTER_RUDDER; break;
-                       // case ButtonMap.SpecialButton.THROTTLE_ZERO: resetValue = ComboBoxItems.THROTTLE_OFF; break;
+                        case ButtonMap.SpecialButton.THROTTLE_ZERO: resetValue = ComboBoxItems.THROTTLE_OFF; break;
                         case ButtonMap.SpecialButton.THROTTLE_HALF: resetValue = ComboBoxItems.THROTTLE_MID; break;
                       //  case ButtonMap.SpecialButton.THROTTLE_MAX: resetValue = ComboBoxItems.THROTTLE_MAX; break;
                         case ButtonMap.SpecialButton.JOYSTICK_ENABLE: resetValue = ComboBoxItems.ENABLE; break;
@@ -420,7 +420,7 @@ namespace HTCViveDroneController
             return lbl;
         }
 
-        private enum ComboBoxItems { DEFAULT=0, CENTER, CENTER_RUDDER, YAW_ENABLE, PITCH_ENABLE, ROLL_ENABLE, THROTTLE_MID, ENABLE, DHAT, AHAT, MAX_ENUM }
+        private enum ComboBoxItems { DEFAULT=0, CENTER, CENTER_RUDDER, YAW_ENABLE, PITCH_ENABLE, ROLL_ENABLE, THROTTLE_OFF, THROTTLE_MID, ENABLE, DHAT, AHAT, MAX_ENUM }
 
         /// <summary>
         /// Get the string for combo box options
@@ -436,7 +436,7 @@ namespace HTCViveDroneController
                 case ComboBoxItems.DEFAULT:      result = "Default"; break;
                 case ComboBoxItems.CENTER:       result = "Center Joystick"; break;
                 case ComboBoxItems.CENTER_RUDDER:result = "Center Rudder"; break;
-               // case ComboBoxItems.THROTTLE_OFF: result = "Throttle Off"; break;
+                case ComboBoxItems.THROTTLE_OFF: result = "Throttle Off"; break;
                 case ComboBoxItems.THROTTLE_MID: result = "Throttle Half"; break;
               //  case ComboBoxItems.THROTTLE_MAX: result = "Throttle Full"; break;               
                 case ComboBoxItems.ENABLE:       result = isPrimary ? "Joystick Enable" : "Throttle Enable"; break;
