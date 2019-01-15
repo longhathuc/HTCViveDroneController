@@ -63,8 +63,8 @@ namespace HTCViveDroneController
 			public readonly string Name;
 			public bool RightHanded = true; // right (true) or left (false) handed for primary controller
 			public bool ControlTypeJoystick = true; // joystick (true) or flightstick (false) simulation
-			public bool GripTypeTogglePrimary = false;   // is the grip a toggle (true) or hold (false) type
-			public bool GripTypeToggleSecondary = false; // is the grip a toggle (true) or hold (false) type
+			public bool GripTypeTogglePrimary = true;   // is the grip a toggle (true) or hold (false) type
+			public bool GripTypeToggleSecondary = true; // is the grip a toggle (true) or hold (false) type
 			public Dictionary<ViveButtons, ButtonMap> PrimaryMap = new Dictionary<ViveButtons, ButtonMap>();
 			public Dictionary<ViveButtons, ButtonMap> SecondaryMap = new Dictionary<ViveButtons, ButtonMap>();
 
@@ -787,8 +787,10 @@ namespace HTCViveDroneController
 
 				// handle primary vs secondary variables - read only
 				Dictionary<ViveButtons, bool> buttons = isPrimary ? _buttonsPrimary : _buttonsSecondary;
-				bool gripTypeToggle = isPrimary ? CurrentConfiguration.GripTypeTogglePrimary : CurrentConfiguration.GripTypeToggleSecondary;
-				ReleaseAction actionOnRelease = isPrimary ? actionOnReleasePrimary : actionOnReleaseSecondary;
+				//bool gripTypeToggle = isPrimary ? CurrentConfiguration.GripTypeTogglePrimary : CurrentConfiguration.GripTypeToggleSecondary;
+                bool gripTypeToggle = true;
+
+                ReleaseAction actionOnRelease = isPrimary ? actionOnReleasePrimary : actionOnReleaseSecondary;
 				// handle primary vs secondary variables - modifiable
 				SteamVR_Utils.RigidTransform gripDownRT = isPrimary ? _gripDownRTPrimary : _gripDownRTSecondary;
 				bool grip = isPrimary ? _gripPrimary : _gripSecondary;
@@ -1150,8 +1152,6 @@ namespace HTCViveDroneController
 			System.Diagnostics.Process.Start(_logFileName);
 		}
 
-
-
 		private void cmbVJoyId_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string item = cmbVJoyId.SelectedItem.ToString();
@@ -1172,11 +1172,8 @@ namespace HTCViveDroneController
 		}
 
 		private void btnConfig_Click(object sender, EventArgs e)
-		{
-
-
+		{            
 			_configPanel.Show();
-
 		}
 
 		private void btnVjoyConfig_Click(object sender, EventArgs e)
@@ -1186,32 +1183,28 @@ namespace HTCViveDroneController
 			{
 				// launch vjoy config
 				Process[] runningProcess = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(_vjoyConfigBin));
-				if (runningProcess.Length == 0)
-				{
+				if (runningProcess.Length == 0)				
 					Process.Start(_vjoyPath + "\\" + _vjoyConfigBin);
-				}
-				else
-				{
+				else				
 					WindowHelper.BringProcessToFront(runningProcess[0]);
-				}
+				
 			}
 		}
 
 		private void btnVjoyMonitor_Click(object sender, EventArgs e)
 		{
-			if (!VjoyPathIsValid()) PromptForVjoyPath();
+			if (!VjoyPathIsValid())
+                PromptForVjoyPath();
+
 			if (VjoyPathIsValid())
 			{
 				// launch vjoy monitor
 				Process[] runningProcess = Process.GetProcessesByName(Path.GetFileNameWithoutExtension(_vjoyMonitorBin));
-				if (runningProcess.Length == 0)
-				{
-					Process.Start(_vjoyPath + "\\" + _vjoyMonitorBin);
-				}
-				else
-				{
+				if (runningProcess.Length == 0)				
+					Process.Start(_vjoyPath + "\\" + _vjoyMonitorBin);				
+				else				
 					WindowHelper.BringProcessToFront(runningProcess[0]);
-				}
+				
 			}
 		}
 

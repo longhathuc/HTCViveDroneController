@@ -57,8 +57,8 @@
             this.tlpConfig.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 12F));
             this.tlpConfig.Controls.Add(this.lblLeftController, 1, 3);
             this.tlpConfig.Controls.Add(this.lblRightController, 4, 3);
-            this.tlpConfig.Controls.Add(this.flpButtons, 1, 10);
             this.tlpConfig.Controls.Add(this.flowLayoutPanel1, 1, 1);
+            this.tlpConfig.Controls.Add(this.flpButtons, 1, 10);
             this.tlpConfig.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tlpConfig.Location = new System.Drawing.Point(0, 0);
             this.tlpConfig.Name = "tlpConfig";
@@ -108,8 +108,8 @@
             this.flpButtons.AutoSize = true;
             this.flpButtons.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.tlpConfig.SetColumnSpan(this.flpButtons, 5);
-            this.flpButtons.Controls.Add(this.btnAccept);
             this.flpButtons.Controls.Add(this.btnCancel);
+            this.flpButtons.Controls.Add(this.btnAccept);
             this.flpButtons.Controls.Add(this.btnOK);
             this.flpButtons.FlowDirection = System.Windows.Forms.FlowDirection.RightToLeft;
             this.flpButtons.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -123,11 +123,11 @@
             // 
             this.btnAccept.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnAccept.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAccept.Location = new System.Drawing.Point(189, 3);
+            this.btnAccept.Location = new System.Drawing.Point(96, 3);
             this.btnAccept.Name = "btnAccept";
             this.btnAccept.Size = new System.Drawing.Size(87, 27);
             this.btnAccept.TabIndex = 4;
-            this.btnAccept.Text = "Apply";
+            this.btnAccept.Text = "Ok";
             this.btnAccept.UseVisualStyleBackColor = true;
             this.btnAccept.Click += new System.EventHandler(this.btnAccept_Click);
             // 
@@ -135,7 +135,7 @@
             // 
             this.btnCancel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCancel.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnCancel.Location = new System.Drawing.Point(96, 3);
+            this.btnCancel.Location = new System.Drawing.Point(189, 3);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(87, 27);
             this.btnCancel.TabIndex = 5;
@@ -151,6 +151,7 @@
             this.btnOK.TabIndex = 6;
             this.btnOK.Text = "OK";
             this.btnOK.UseVisualStyleBackColor = true;
+            this.btnOK.Visible = false;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
             // flowLayoutPanel1
