@@ -31,16 +31,16 @@
             this.tlpConfig = new System.Windows.Forms.TableLayoutPanel();
             this.lblLeftController = new System.Windows.Forms.Label();
             this.lblRightController = new System.Windows.Forms.Label();
-            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
-            this.lblConfiguration = new System.Windows.Forms.Label();
-            this.cmbConfigurations = new System.Windows.Forms.ComboBox();
             this.flpButtons = new System.Windows.Forms.FlowLayoutPanel();
             this.btnAccept = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
             this.btnOK = new System.Windows.Forms.Button();
+            this.flowLayoutPanel1 = new System.Windows.Forms.FlowLayoutPanel();
+            this.lblConfiguration = new System.Windows.Forms.Label();
+            this.cmbConfigurations = new System.Windows.Forms.ComboBox();
             this.tlpConfig.SuspendLayout();
-            this.flowLayoutPanel1.SuspendLayout();
             this.flpButtons.SuspendLayout();
+            this.flowLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // tlpConfig
@@ -102,44 +102,6 @@
             this.lblRightController.TabIndex = 13;
             this.lblRightController.Text = "Right Controller";
             // 
-            // flowLayoutPanel1
-            // 
-            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.flowLayoutPanel1.AutoSize = true;
-            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
-            this.tlpConfig.SetColumnSpan(this.flowLayoutPanel1, 3);
-            this.flowLayoutPanel1.Controls.Add(this.lblConfiguration);
-            this.flowLayoutPanel1.Controls.Add(this.cmbConfigurations);
-            this.flowLayoutPanel1.Location = new System.Drawing.Point(248, 15);
-            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
-            this.flowLayoutPanel1.Size = new System.Drawing.Size(251, 32);
-            this.flowLayoutPanel1.TabIndex = 16;
-            // 
-            // lblConfiguration
-            // 
-            this.lblConfiguration.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.lblConfiguration.AutoSize = true;
-            this.lblConfiguration.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblConfiguration.Location = new System.Drawing.Point(3, 7);
-            this.lblConfiguration.Name = "lblConfiguration";
-            this.lblConfiguration.Size = new System.Drawing.Size(105, 18);
-            this.lblConfiguration.TabIndex = 3;
-            this.lblConfiguration.Text = "Configuration:";
-            // 
-            // cmbConfigurations
-            // 
-            this.cmbConfigurations.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.cmbConfigurations.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbConfigurations.FormattingEnabled = true;
-            this.cmbConfigurations.Items.AddRange(new object[] {
-            "Right Hand",
-            "Left Hand"});
-            this.cmbConfigurations.Location = new System.Drawing.Point(114, 3);
-            this.cmbConfigurations.Name = "cmbConfigurations";
-            this.cmbConfigurations.Size = new System.Drawing.Size(134, 26);
-            this.cmbConfigurations.TabIndex = 4;
-            this.cmbConfigurations.SelectedIndexChanged += new System.EventHandler(this.cmbConfigurations_SelectedIndexChanged);
-            // 
             // flpButtons
             // 
             this.flpButtons.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -191,6 +153,46 @@
             this.btnOK.UseVisualStyleBackColor = true;
             this.btnOK.Click += new System.EventHandler(this.btnOK_Click);
             // 
+            // flowLayoutPanel1
+            // 
+            this.flowLayoutPanel1.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.flowLayoutPanel1.AutoSize = true;
+            this.flowLayoutPanel1.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.tlpConfig.SetColumnSpan(this.flowLayoutPanel1, 3);
+            this.flowLayoutPanel1.Controls.Add(this.lblConfiguration);
+            this.flowLayoutPanel1.Controls.Add(this.cmbConfigurations);
+            this.flowLayoutPanel1.Location = new System.Drawing.Point(32, 15);
+            this.flowLayoutPanel1.Name = "flowLayoutPanel1";
+            this.flowLayoutPanel1.Size = new System.Drawing.Size(251, 32);
+            this.flowLayoutPanel1.TabIndex = 16;
+            // 
+            // lblConfiguration
+            // 
+            this.lblConfiguration.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.lblConfiguration.AutoSize = true;
+            this.lblConfiguration.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfiguration.Location = new System.Drawing.Point(3, 7);
+            this.lblConfiguration.Name = "lblConfiguration";
+            this.lblConfiguration.Size = new System.Drawing.Size(105, 18);
+            this.lblConfiguration.TabIndex = 3;
+            this.lblConfiguration.Text = "Configuration:";
+            this.lblConfiguration.Visible = false;
+            // 
+            // cmbConfigurations
+            // 
+            this.cmbConfigurations.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.cmbConfigurations.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cmbConfigurations.FormattingEnabled = true;
+            this.cmbConfigurations.Items.AddRange(new object[] {
+            "Right Hand",
+            "Left Hand"});
+            this.cmbConfigurations.Location = new System.Drawing.Point(114, 3);
+            this.cmbConfigurations.Name = "cmbConfigurations";
+            this.cmbConfigurations.Size = new System.Drawing.Size(134, 26);
+            this.cmbConfigurations.TabIndex = 4;
+            this.cmbConfigurations.Visible = false;
+            this.cmbConfigurations.SelectedIndexChanged += new System.EventHandler(this.cmbConfigurations_SelectedIndexChanged);
+            // 
             // ConfigPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -207,9 +209,9 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ConfigPanel_FormClosing);
             this.tlpConfig.ResumeLayout(false);
             this.tlpConfig.PerformLayout();
+            this.flpButtons.ResumeLayout(false);
             this.flowLayoutPanel1.ResumeLayout(false);
             this.flowLayoutPanel1.PerformLayout();
-            this.flpButtons.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

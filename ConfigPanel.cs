@@ -116,8 +116,7 @@ namespace HTCViveDroneController
             {
                 // Primary button controls
                 int rowIndex = _cfgRowStart;
-                foreach (KeyValuePair<ViveButtons, ButtonMap> item in config.PrimaryMap)
-                    if (item.Key != ViveButtons.TOUCHPAD)
+                foreach (KeyValuePair<ViveButtons, ButtonMap> item in config.PrimaryMap)                   
                     {
                         NewRow(rowIndex);
                         tlpConfig.Controls.Add(NewLabel(item.Value.Name), columnPrimaryLbl, rowIndex);
@@ -128,8 +127,7 @@ namespace HTCViveDroneController
 
                 // Secondary button controls
                 rowIndex = _cfgRowStart;
-                foreach (KeyValuePair<ViveButtons, ButtonMap> item in config.SecondaryMap)
-                    if (item.Key != ViveButtons.TOUCHPAD)
+                foreach (KeyValuePair<ViveButtons, ButtonMap> item in config.SecondaryMap)                
                     {
                         NewRow(rowIndex);
                         tlpConfig.Controls.Add(NewLabel(item.Value.Name), columnSecondaryLbl, rowIndex);
@@ -266,35 +264,7 @@ namespace HTCViveDroneController
                     }
                 }
                 item.Key.SelectedIndex = (int)resetValue;
-            }
-
-            foreach (KeyValuePair<ComboBox, ConfigHatItem> item in _configHatItems)
-            {
-                bool isPrimary = item.Value.BaseItem.IsPrimary;
-                ComboBoxItems resetValue = ComboBoxItems.DEFAULT;
-                ButtonMap btnMap = item.Value.BaseItem.Map;
-                ButtonMap.HatButtons hat = btnMap.HatButton;
-                ButtonMap.HatDir dir = item.Value.Dir;
-                ButtonMap.SpecialButton btn = hat.GetSpecialButton(dir);
-
-                if ( btn != ButtonMap.SpecialButton.NONE)
-                {
-                    switch (btn)
-                    {
-                        case ButtonMap.SpecialButton.CENTER_JOYSTICK: resetValue = ComboBoxItems.CENTER; break;
-                        case ButtonMap.SpecialButton.CENTER_RUDDER: resetValue = ComboBoxItems.CENTER_RUDDER; break;
-                        case ButtonMap.SpecialButton.THROTTLE_ZERO: resetValue = ComboBoxItems.THROTTLE_OFF; break;
-                        case ButtonMap.SpecialButton.THROTTLE_HALF: resetValue = ComboBoxItems.THROTTLE_MID; break;
-                      //  case ButtonMap.SpecialButton.THROTTLE_MAX: resetValue = ComboBoxItems.THROTTLE_MAX; break;
-                        case ButtonMap.SpecialButton.JOYSTICK_ENABLE: resetValue = ComboBoxItems.ENABLE; break;
-                        case ButtonMap.SpecialButton.PITCH_ENABLE: resetValue = ComboBoxItems.PITCH_ENABLE; break;
-                        case ButtonMap.SpecialButton.YAW_ENABLE: resetValue = ComboBoxItems.YAW_ENABLE; break;
-                        case ButtonMap.SpecialButton.ROLL_ENABLE: resetValue = ComboBoxItems.ROLL_ENABLE; break;
-                    }
-                }
-
-                item.Key.SelectedIndex = (int)resetValue;
-            }
+            }       
             SetFormClientSize();
             _initialized = true;
         }

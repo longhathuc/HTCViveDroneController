@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Diagnostics;
 using System.Numerics;
@@ -12,7 +7,6 @@ using System.Threading;
 using System.Windows.Forms;
 using Valve.VR;
 using vJoyInterfaceWrap;
-using System.Configuration;
 using System.Reflection;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -29,12 +23,10 @@ namespace HTCViveDroneController
 		public const string _vjoyConfigBin = "vJoyConf.exe";
 		public const string _vjoyDefaultPath = "c:\\Program Files\\vJoy\\x64";
 
-		// Public Settings
-		public const int MAX_NUM_HATS = 4; // max allowed by vjoy
+		// Public Settings	
 		static public uint _vjoyId = 0; // changing this will change which vjoy device we're connected to, 0 = not connected
 		static public string _vjoyPath = ""; // path to the jvoy executables
-		static public bool _showControlPanel = false;
-		static public double _hapticZonePercent = 0.05; // if you go this far or further from the ends, you get haptic buzz
+				static public double _hapticZonePercent = 0.05; // if you go this far or further from the ends, you get haptic buzz
 		static public bool _invertXAxis = false;
 		static public bool _invertYAxis = true;
 		static public bool _invertZAxis = true;
@@ -48,9 +40,7 @@ namespace HTCViveDroneController
 		{
 			APP_MENU = EVRButtonId.k_EButton_ApplicationMenu,
 			GRIP = EVRButtonId.k_EButton_Grip,
-			TOUCHPAD = EVRButtonId.k_EButton_SteamVR_Touchpad,
-			TRIGGER = EVRButtonId.k_EButton_SteamVR_Trigger,
-			HAIR_TRIGGER = EVRButtonId.k_EButton_Max, // we use this for the hair trigger
+			TRIGGER = EVRButtonId.k_EButton_SteamVR_Trigger			
 		};
 
 		// Variables
@@ -183,10 +173,9 @@ namespace HTCViveDroneController
 					}
 					cmbVJoyId.SelectedIndex = 0;
 					int numItems = cmbVJoyId.Items.Count;
-					if (numItems < 2)
-					{
+					if (numItems < 2)					
 						errMsg = "No Vjoy devices available";
-					}
+					
 					else if (cmbVJoyId.Items.Count == 2)
 					{
 						// there's only one item (the other is the message to select an item) so lets just use it by default
@@ -196,10 +185,8 @@ namespace HTCViveDroneController
 					{
 						// use id of zero or what was last saved in the appsettings if it's valid
 						string idStr = System.Configuration.ConfigurationManager.AppSettings[_configKeyVjoyId];
-						if (cmbVJoyId.Items.Contains(idStr))
-						{
-							cmbVJoyId.SelectedItem = idStr;
-						}
+						if (cmbVJoyId.Items.Contains(idStr))						
+							cmbVJoyId.SelectedItem = idStr;						
 					}
 
 					if (errMsg == null) // no error so far
@@ -213,20 +200,15 @@ namespace HTCViveDroneController
 							_steamVR = SteamVR.instance;
 						}
 					}
-					else
-					{
+					else					
 						errMsg = string.Format("Version of Driver ({0:X}) does NOT match DLL Version ({1:X})\n", DrvVer, DllVer);
-					}
+					
 				}
 
 
-				if (errMsg == null)
-				{
-					if (OpenVR.System == null)
-					{
-						errMsg = "SteamVR not started.";
-					}
-				}
+				if (errMsg == null)				
+					if (OpenVR.System == null)					
+						errMsg = "SteamVR not started.";	
 			}
 
 			if (errMsg == null)
@@ -302,10 +284,9 @@ namespace HTCViveDroneController
 		public static void SetCurrentConfig(string name)
 		{
 			Configuration config = GetConfig(name);
-			if (config != null)
-			{
+			if (config != null)			
 				CurrentConfiguration = config;
-			}
+			
 		}
 		/// <summary>
 		/// Update the status label on the main form
@@ -657,67 +638,7 @@ namespace HTCViveDroneController
 
 			public string Name { get; set; } = "Undefined";
 
-			[Serializable()]
-			public class HatButtons
-			{
-				private Dictionary<HatDir, JoyButton> JoyMap = new Dictionary<HatDir, JoyButton>();
-				private Dictionary<HatDir, SpecialButton> SpecialMap = new Dictionary<HatDir, SpecialButton>();
-				private Dictionary<HatDir, JoyButton> DefaultJoyMap = new Dictionary<HatDir, JoyButton>();
-
-				public HatButtons()
-				{
-					foreach (HatDir dir in Enum.GetValues(typeof(HatDir)))
-					{
-						JoyMap[dir] = JoyButton.NONE;
-						SpecialMap[dir] = SpecialButton.NONE;
-					}
-				}
-
-				/// <summary>
-				/// Used at initialization time to setup the hat
-				/// </summary>
-				/// <param name="dir"></param>
-				/// <param name="jbutton"></param>
-				public void SetupHatButton(HatDir dir, JoyButton jbutton = JoyButton.NONE)
-				{
-					DefaultJoyMap[dir] = jbutton;
-					JoyMap[dir] = jbutton;
-					SpecialMap[dir] = SpecialButton.NONE;
-				}
-
-				//public void SetHatButton(HatDir dir, SpecialButton sbutton = SpecialButton.NONE)
-				//{
-				//    JoyMap[dir] = JoyButton.NONE;
-				//    SpecialMap[dir] = sbutton;
-				//}
-
-				public JoyButton GetJoyButton(HatDir dir)
-				{
-					return JoyMap[dir];
-				}
-
-				public SpecialButton GetSpecialButton(HatDir dir)
-				{
-					return SpecialMap[dir];
-				}
-
-				public void SetButton(HatDir dir, JoyButton btn)
-				{
-					JoyMap[dir] = btn;
-					SpecialMap[dir] = SpecialButton.NONE;
-				}
-
-				public void SetButton(HatDir dir, SpecialButton btn)
-				{
-					SpecialMap[dir] = btn;
-					JoyMap[dir] = JoyButton.NONE;
-				}
-
-				public void SetToDefalt(HatDir dir)
-				{
-					JoyMap[dir] = DefaultJoyMap[dir];
-				}
-			}
+			
 
 			private JoyButton _buttonBit = JoyButton.NONE;
 			private SpecialButton _buttonSpecial = SpecialButton.NONE;
@@ -726,7 +647,7 @@ namespace HTCViveDroneController
 			public SpecialButton ButtonSpecial { get { return _buttonSpecial; } }
 			public JoyButton DefaultJoyButton { get; } = JoyButton.NONE;
 			public SpecialButton DefaultSpecialButton { get; } = SpecialButton.NONE;
-			public HatButtons HatButton { get; } = null;
+			
 
 			/// <summary>
 			/// Constructor for all button except touchpad
@@ -743,8 +664,7 @@ namespace HTCViveDroneController
 			/// </summary>
 			/// <param name="specialButton">should be hat1 or hat2</param>
 			public ButtonMap(SpecialButton specialButton = SpecialButton.NONE)
-			{
-				HatButton = new HatButtons();
+			{			
 				DefaultSpecialButton = specialButton;
 				SetButtonMap(specialButton);
 			}
@@ -782,24 +702,23 @@ namespace HTCViveDroneController
 			primaryMap[ViveButtons.GRIP] = new ButtonMap(ButtonMap.JoyButton.PRIMARY_GRIP);
 			primaryMap[ViveButtons.APP_MENU] = new ButtonMap(ButtonMap.JoyButton.PRIMARY_MENU);
 			primaryMap[ViveButtons.TRIGGER] = new ButtonMap(ButtonMap.JoyButton.PRIMARY_TRIGGER);
-			primaryMap[ViveButtons.HAIR_TRIGGER] = new ButtonMap(ButtonMap.JoyButton.PRIMARY_TRIGGER_HAIR);
+			
 
 			// SECONDARY DEFAULTS
 			secondaryMap[ViveButtons.GRIP] = new ButtonMap(ButtonMap.JoyButton.SECONDARY_GRIP);
 			secondaryMap[ViveButtons.APP_MENU] = new ButtonMap(ButtonMap.JoyButton.SECONDARY_MENU);
 			secondaryMap[ViveButtons.TRIGGER] = new ButtonMap(ButtonMap.JoyButton.SECONDARY_TRIGGER);
-			secondaryMap[ViveButtons.HAIR_TRIGGER] = new ButtonMap(ButtonMap.JoyButton.SECONDARY_TRIGGER_HAIR);
+			
 
 			// button names
 			primaryMap[ViveButtons.GRIP].Name = "Grip";
 			primaryMap[ViveButtons.APP_MENU].Name = "Application";
-			primaryMap[ViveButtons.TRIGGER].Name = "Trigger Bottom";
-			primaryMap[ViveButtons.HAIR_TRIGGER].Name = "Hair Trigger";
+			primaryMap[ViveButtons.TRIGGER].Name = "Trigger Bottom";			
 
 			secondaryMap[ViveButtons.GRIP].Name = "Grip ";
 			secondaryMap[ViveButtons.APP_MENU].Name = "Application ";
 			secondaryMap[ViveButtons.TRIGGER].Name = "Trigger Bottom";
-			secondaryMap[ViveButtons.HAIR_TRIGGER].Name = "Hair Trigger";
+			
 
 			// Default config
 			primaryMap[ViveButtons.GRIP].SetButtonMap(ButtonMap.SpecialButton.JOYSTICK_ENABLE);
@@ -875,8 +794,7 @@ namespace HTCViveDroneController
 				bool grip = isPrimary ? _gripPrimary : _gripSecondary;
 				bool gripHolding = isPrimary ? _gripHoldingPrimary : _gripHoldingSecondary;
 				Dictionary<ViveButtons, ButtonMap> buttonMapping = isPrimary ? CurrentConfiguration.PrimaryMap : CurrentConfiguration.SecondaryMap;
-
-
+                
 				// Read Position
 				HmdMatrix34_t pose = device.GetPose().mDeviceToAbsoluteTracking;
 				SteamVR_Utils.RigidTransform rt = new SteamVR_Utils.RigidTransform(pose);
@@ -889,18 +807,16 @@ namespace HTCViveDroneController
 				foreach (ViveButtons button in Enum.GetValues(typeof(ViveButtons)))
 				{
 					bool buttonDown;
-					if (button == ViveButtons.HAIR_TRIGGER) buttonDown = device.GetHairTrigger();
-					else buttonDown = device.GetPress((EVRButtonId)button);
+					buttonDown = device.GetPress((EVRButtonId)button);
 
 					buttons[button] = buttonDown;
 					//debugPrint += buttons[button] ? "1" : "0";
 					ButtonMap buttonMap = buttonMapping[button];
 					if (buttonMap.ButtonBit != ButtonMap.JoyButton.NONE)
 					{
-						if (buttonDown)
-						{
+						if (buttonDown)						
 							iReport.Buttons |= (uint)1 << ((int)buttonMap.ButtonBit - 1);
-						}
+						
 					}
 					else if (buttonMap.ButtonSpecial != ButtonMap.SpecialButton.NONE)
 					{
@@ -914,24 +830,20 @@ namespace HTCViveDroneController
 							switch (sbutton)
 
 							{
-								case ButtonMap.SpecialButton.YAW_ENABLE:
-									if (buttonDown)
-										yawEnabled = true;
+								//case ButtonMap.SpecialButton.YAW_ENABLE:
+								//	if (buttonDown)
+								//		yawEnabled = true;
+								//	break;
 
-									break;
+								//case ButtonMap.SpecialButton.PITCH_ENABLE:
+								//	if (buttonDown)
+								//		pitchEnabled = true;
+								//	break;
 
-								case ButtonMap.SpecialButton.PITCH_ENABLE:
-									if (buttonDown)
-										pitchEnabled = true;
-									break;
-
-								case ButtonMap.SpecialButton.ROLL_ENABLE:
-									if (buttonDown)
-										rollEnabled = true;
-									break;
-
-
-
+								//case ButtonMap.SpecialButton.ROLL_ENABLE:
+								//	if (buttonDown)
+								//		rollEnabled = true;
+								//	break;
 								case ButtonMap.SpecialButton.CENTER_JOYSTICK:
 									if (buttonDown)
 									{
@@ -1095,18 +1007,15 @@ namespace HTCViveDroneController
 						// Shake if outsize range
 						if (gripHolding && (
 							(iReport.AxisZ < _joystickSettings.MinHapticRange) ||
-							(iReport.AxisZ > _joystickSettings.MaxHapticRange)))
-						{
-							VibrateController(device, 50);
-						}
+							(iReport.AxisZ > _joystickSettings.MaxHapticRange)))						
+							VibrateController(device, 50);						
 
 						// enforce boundaries
 						iReport.AxisZ = Math.Max(Math.Min(iReport.AxisZ, _joystickSettings.MaxJoystickValue), 0);
 
 						//debugPrint += " SPos: " + rtLocal.pos.X.ToString(formatF) + "," + rtLocal.pos.Y.ToString(formatF) + "," + rtLocal.pos.Z.ToString(formatF);
 						//Debug.Print(debugPrint);
-
-
+                        
 						iReport.AxisXRot = Math.Max(Math.Min(iReport.AxisXRot, _joystickSettings.MaxJoystickValue), 0);
 					}
 
@@ -1132,15 +1041,13 @@ namespace HTCViveDroneController
 									JoyStickLockedPrimary.Y = iReport.AxisY;
 									JoyStickLockedPrimary.ZR = iReport.AxisZRot;
 								}
-								else
-								{
+								else								
 									JoyStickLockedSecondary.Z = iReport.AxisZ;
-								}
+								
 								break;
 						}
 					}
 				}
-
 				// handle primary vs secondary variables - modifiable
 				if (isPrimary)
 				{
@@ -1169,19 +1076,14 @@ namespace HTCViveDroneController
 			if (_haptics.Count > 0)
 			{
 				int loops = Convert.ToInt32(_pollCycleMSec * 1000 / _hapticPulseUSec);
-				for (int i = 0; i < loops; i++)
-				{
-					foreach (KeyValuePair<SteamVR_Controller.Device, int> haptic in _haptics)
-					{
-						if (i < haptic.Value) haptic.Key.TriggerHapticPulse(_hapticPulseUSec);
-					}
-				}
+				for (int i = 0; i < loops; i++)				
+					foreach (KeyValuePair<SteamVR_Controller.Device, int> haptic in _haptics)					
+						if (i < haptic.Value) haptic.Key.TriggerHapticPulse(_hapticPulseUSec);							
 				_haptics.Clear();
 			}
-			else
-			{
+			else			
 				System.Threading.Thread.Sleep(_pollCycleMSec);
-			}
+			
 		}
 
 		private bool VjoyPathIsValid() { return SetVjoyPathIfValid(_vjoyPath); }
@@ -1345,6 +1247,4 @@ namespace HTCViveDroneController
 			private static extern bool IsIconic(IntPtr handle);
 		}
 	}
-
-
 }
